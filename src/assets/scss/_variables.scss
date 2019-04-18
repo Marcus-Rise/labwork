@@ -1,0 +1,17 @@
+//@import "~vuetify-scss/settings/variables";
+
+@font-face {
+  font-family: FortuneC; /* Имя шрифта */
+  src: url('/fonts/regular.otf');
+}
+
+@font-face {
+  font-family: FortuneC-Bold; /* Имя шрифта */
+  src: url('/fonts/bold.otf');
+}
+
+$font-regular: FortuneC, sans-serif;
+$font-bold: FortuneC-Bold, sans-serif;
+
+$color-pink: #A454FF;
+$color-blue: #5191ff;
