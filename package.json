@@ -5,7 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
+    "build-modern": "vue-cli-service build --modern",
+    "test:unit": "vue-cli-service test:unit",
+    "package-dev": "set NODE_ENV=development && tsc  index.ts --outDir ./dist --module commonjs && electron ./dist/index.js",
+    "package-win": "set NODE_ENV=production && tsc  index.ts --outDir ./dist --module commonjs && electron-packager ./dist packaged --platform=win32 --arch=x64 --overwrite",
+    "package-linux": "set NODE_ENV=production && tsc  index.ts --outDir ./dist --module commonjs && electron-packager ./dist packaged --prune=true --platform=linux --arch=x64 --overwrite"
   },
   "dependencies": {
     "core-js": "^2.6.5",
