@@ -1,8 +1,8 @@
 <template lang="pug">
   v-layout.justify-center
     div.map-container
-      img(src="@/assets/scheme/sheme-dark.png" usemap="#image-map" v-if="isDark")
-      img(src="@/assets/scheme/sheme.png" usemap="#image-map" v-if="!isDark")
+      img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
+      img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")
       .map-generator-1(@click="generatorSetup_1()")
         span(:class="{'dark': isDark, 'light': !isDark}" v-if="generatorDots_1")
           b {{generator1.power}}дБ
@@ -11,26 +11,26 @@
           b {{generator2.power}}дБ
 
       template(v-if="generatorDots_1")
-        dot-cmpt(:position="{left: 130, top: 119}" :value="generator1.power" :defaultValue="-30")
-        dot-cmpt(:position="{left: 230, top: 30}" :value="generator1.power" :defaultValue="-30 -5")
-        dot-cmpt(:position="{left: 400, top: 30}" :value="generator1.power" :defaultValue="-30 -5 + 40")
-        dot-cmpt(:position="{left: 550, top: 120}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5")
+        dot-cmpt(:position="{left: 170, top: 133}" :value="generator1.power" :defaultValue="-30")
+        dot-cmpt(:position="{left: 275, top: 29}" :value="generator1.power" :defaultValue="-30 -5")
+        dot-cmpt(:position="{left: 445, top: 29}" :value="generator1.power" :defaultValue="-30 -5 + 40")
+        dot-cmpt(:position="{left: 540, top: 134}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5")
 
-        dot-cmpt(:position="{left: 620, top: 120}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30")
-        dot-cmpt(:position="{left: 720, top: 30}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5")
-        dot-cmpt(:position="{left: 900, top: 30}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40")
-        dot-cmpt(:position="{left: 1100, top: 120}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5")
+        dot-cmpt(:position="{left: 630, top: 134}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30")
+        dot-cmpt(:position="{left: 720, top: 29}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5")
+        dot-cmpt(:position="{left: 900, top: 29}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40")
+        dot-cmpt(:position="{left: 1090, top: 133}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5")
 
       template(v-if="generatorDots_2")
-        dot-cmpt(:position="{left: 1035, top: 120}" :value="generator2.power" :defaultValue="-30")
-        dot-cmpt(:position="{left: 900, top: 220}" :value="generator2.power" :defaultValue="-30 -5")
-        dot-cmpt(:position="{left: 720, top: 220}" :value="generator2.power" :defaultValue="-30 -5 + 40")
-        dot-cmpt(:position="{left: 620, top: 120}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5")
+        dot-cmpt(:position="{left: 1000, top: 134}" :value="generator2.power" :defaultValue="-30")
+        dot-cmpt(:position="{left: 900, top: 240}" :value="generator2.power" :defaultValue="-30 -5")
+        dot-cmpt(:position="{left: 720, top: 240}" :value="generator2.power" :defaultValue="-30 -5 + 40")
+        dot-cmpt(:position="{left: 630, top: 134}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5")
 
-        dot-cmpt(:position="{left: 550, top: 120}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30")
-        dot-cmpt(:position="{left: 400, top: 220}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5")
-        dot-cmpt(:position="{left: 230, top: 220}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40")
-        dot-cmpt(:position="{left: 130, top: 120}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5")
+        dot-cmpt(:position="{left: 540, top: 134}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30")
+        dot-cmpt(:position="{left: 440, top: 240}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5")
+        dot-cmpt(:position="{left: 270, top: 240}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40")
+        dot-cmpt(:position="{left: 80, top: 134}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5")
 
     GeneratorSetupDialogCmpt(
     :show="generatorDialog_1"
@@ -105,20 +105,18 @@
     }
 
     .map-generator-1 {
-      position: absolute;
-      top: 96px;
-      left: 0;
-      width: 75px;
-      height: 75px;
-
-
+        position: absolute;
+        top: 103px;
+        left: 0;
+        width: 71px;
+        height: 71px;
     }
 
     .map-generator-1, .map-generator-2 {
       span {
-        bottom: -10px;
+        bottom: -25px;
         position: absolute;
-        left: 30px;
+        left: 25px;
 
         &.dark {
           color: $color-blue;
@@ -127,11 +125,11 @@
     }
 
     .map-generator-2 {
-      position: absolute;
-      top: 100px;
-      right: 0;
-      width: 75px;
-      height: 75px;
+        position: absolute;
+        top: 104px;
+        right: 0;
+        width: 72px;
+        height: 70px;
     }
   }
 
