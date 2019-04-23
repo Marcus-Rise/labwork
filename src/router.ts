@@ -32,6 +32,13 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "labwork" */ './views/Labwork.vue')
+    }, {
+      path: '/labwork2',
+      name: 'labwork2',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "labwork2" */ './views/Labwork2.vue')
     }
   ]
 })
