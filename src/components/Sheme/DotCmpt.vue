@@ -2,23 +2,20 @@
   .dot-wrapper(:style="styles" :class="{'dark': isDark, 'light': !isDark}")
     .dot
     span(v-if="value !== undefined")
-      b {{defaultValue + value}}
+      b {{defaultValue + value}}{{suffix}}
 </template>
 
 <script lang="ts">
   import {Component, Prop, Vue} from "vue-property-decorator";
   import {Getter} from "vuex-class";
-
-  interface Position {
-    left: number
-    top: number
-  }
+  import Position from "@/core/Position";
 
   @Component
   export default class DotCmpt extends Vue {
     @Getter isDark?: boolean;
     @Prop({type: Number, default: 0}) defaultValue?: number;
     @Prop({type: Number, default: 0}) value?: number;
+    @Prop({type: String, default: ''}) suffix?: string;
     @Prop({type: Object, required: true}) position?: Position;
 
     get styles(): string {
