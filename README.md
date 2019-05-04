@@ -1,10 +1,8 @@
-# Запуск
+# Run
 ```bash
-$ docker-compose pull # Загрузка последних образов
-$ docker-compose up -d --build # Сборка
+$ docker-compose up -d --build # docker with build
+$ docker-compose pull # run docker without build
 ```
-https://localhost для b2b production
+https://localhost production
 
-https://localhost:8000 для b2b development
-
-http://localhost:82/ для старого клиента apiplatform
+https://localhost:8000 development
