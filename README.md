@@ -1,34 +1,10 @@
-# net-labwork
+# Запуск
+```bash
+$ docker-compose pull # Загрузка последних образов
+$ docker-compose up -d --build # Сборка
+```
+https://localhost для b2b production
 
-## Project setup
-```
-yarn install
-```
+https://localhost:8000 для b2b development
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+http://localhost:82/ для старого клиента apiplatform
