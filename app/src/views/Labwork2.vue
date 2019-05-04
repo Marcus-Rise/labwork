@@ -5,7 +5,12 @@
             img(src="@/assets/scheme/light2.png" usemap="#image-map" v-if="!isDark")
             .telephone-device-dialog_1.mapped-element(@click="telephoneDeviceDialog_1 = true")
             .telephone-device-dialog_2.mapped-element(@click="telephoneDeviceDialog_2 = true")
-            .optical-router-device.mapped-element(@click="opticalRouterDeviceDialog = true")
+            template(v-if="telephoneDevice_1.powerOn || telephoneDevice_2.powerOn")
+                v-tooltip(lazy bottom)
+                    .optical-router-device.mapped-element(slot="activator")
+                    span Отключите подачу сигнала
+            template(v-else)
+                .optical-router-device.mapped-element(@click="opticalRouterDeviceSetup()")
 
             TelephoneDeviceDialog(
                 :show="telephoneDeviceDialog_1"
@@ -38,16 +43,14 @@
                 dot-cmpt(:position="{left: 1190, top: 22}" :value="-39" suffix="dB")
                 dot-cmpt(:position="{left: 1300, top: 22}" :value="4.3" suffix="dB")
                 dot-cmpt(:position="{left: 1465, top: 100}" :value="-7" suffix="dB")
-
-            template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing === 35")
                 beam-icon(:position="{left: 565, top: -5}")
-                beam-icon(:position="{left: 925, top: -5}")
                 beam-icon(:position="{left: 1285, top: -5}")
 
+            template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing === 35")
+                beam-icon(:position="{left: 925, top: -5}")
+
             template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing === 35")
-                beam-icon(:position="{left: 565, top: 150}")
                 beam-icon(:position="{left: 925, top: 150}")
-                beam-icon(:position="{left: 1285, top: 150}")
 
             template(v-if="telephoneDevice_2.powerOn")
                 dot-cmpt(:position="{left: 290, top: 100}" :value="-7" suffix="dB")
@@ -64,6 +67,8 @@
                 dot-cmpt(:position="{left: 1370, top: 100}" :value="-3.5" suffix="dB")
                 dot-cmpt(:position="{left: 1465, top: 100}" :value="0" suffix="dB")
 
+                beam-icon(:position="{left: 1285, top: 150}")
+                beam-icon(:position="{left: 565, top: 150}")
 
 </template>
 
@@ -94,6 +99,12 @@
         telephoneDevice_1: TelephoneDevice = new TelephoneDevice();
         telephoneDevice_2: TelephoneDevice = new TelephoneDevice();
         opticalRouterDevice: OpticalRouterDevice = new OpticalRouterDevice();
+
+        opticalRouterDeviceSetup(): void {
+            if (!this.telephoneDevice_1.powerOn && !this.telephoneDevice_2.powerOn) {
+                this.opticalRouterDeviceDialog = true;
+            }
+        }
 
         opticalRouterDeviceSettuped(): void {
             this.opticalRouterDeviceDialog = false;
@@ -135,7 +146,7 @@
         height: $size;
         position: absolute;
         top: 84px;
-        left: 789px;
+        left: 963px;
     }
 
     .telephone-device-dialog_1, .telephone-device-dialog_2 {

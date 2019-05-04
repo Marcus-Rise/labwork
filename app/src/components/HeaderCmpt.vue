@@ -11,17 +11,18 @@
         v-spacer
         v-toolbar-items.hidden-sm-and-down
             router-link.navLink.link(:to="{name: 'theory'}" :class="{'light': !isDark, 'dark': isDark}") Теория
-            router-link.navLink.link(:to="{name: 'testing'}" :class="{'light': !isDark, 'dark': isDark}") Тестирование
-            router-link.navLink.link(:to="{name: 'labwork'}" :class="{'light': !isDark, 'dark': isDark}") Часть 1
-            router-link.navLink.link(:to="{name: 'labwork2'}" :class="{'light': !isDark, 'dark': isDark}") Часть 2
+            router-link.navLink.link(v-if="!examPassed" :to="{name: 'testing'}" :class="{'light': !isDark, 'dark': isDark}") Тестирование
+            router-link.navLink.link(v-if="examPassed" :to="{name: 'labwork'}" :class="{'light': !isDark, 'dark': isDark}") Часть 1
+            router-link.navLink.link(v-if="examPassed" :to="{name: 'labwork2'}" :class="{'light': !isDark, 'dark': isDark}") Часть 2
 </template>
 
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
-    import {Getter, Mutation} from "vuex-class";
+    import {Getter, Mutation, } from "vuex-class";
 
     @Component
     export default class HeaderCmpt extends Vue {
+        @Getter examPassed?: boolean;
         @Getter isDark?: boolean;
         @Mutation toggleTheme: any;
 

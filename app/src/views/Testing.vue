@@ -20,17 +20,22 @@
         .text-xs-center
           h1(v-if="quiz.status") Допуск получен
           h1(v-if="!quiz.status") Допуск не получен
-      v-btn(color="info" @click="restart()" v-if="!quiz.status") Пройти тест еще раз
-      router-link(:to="{name: 'labwork'}" v-if="quiz.status") Перейти к выполнению лабораторной работы
+      v-flex.xs12.text-xs-center
+        v-btn(color="info" @click="restart()" v-if="!quiz.status") Пройти тест еще раз
+      v-layout.row.wrap
+        v-flex.sm12.md6.text-xs-center.text-md-right.pr-2
+            router-link(:to="{name: 'labwork'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №1
+        v-flex.sm12.md6.text-xs-center.text-md-left
+            router-link(:to="{name: 'labwork2'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №2
 
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
+    import {Component, Vue, Watch} from 'vue-property-decorator';
   import data from '@/models/testing/questions.json';
   import Quiz from "@/models/testing/Quiz";
   import Question from "@/models/testing/Question";
-  import {Getter} from "vuex-class";
+  import {Getter, Mutation} from "vuex-class";
   import Answer from "@/models/testing/Answer";
 
   @Component({
@@ -38,6 +43,7 @@
   })
   export default class Testing extends Vue {
     @Getter isDark?: boolean;
+    @Mutation passExam?: any;
 
     quiz?: Quiz;
     questionIndexCurrent: number = 1;
@@ -49,6 +55,13 @@
 
     get question(): Question | null {
       return this.quiz && this.quiz.questions.length > 0 ? this.quiz.questions[this.questionIndexCurrent - 1] : null;
+    }
+
+    @Watch('isComplete')
+    completeWatch() {
+        if (this.isComplete) {
+            this.passExam();
+        }
     }
 
     next(): void {
