@@ -1,9 +1,8 @@
 <template lang="pug">
     v-dialog(v-model="show" width="500" persistent)
         v-card
-            v-card-title.primary-title.headline Настройка оптического развязывающего устройства
+            v-card-title.primary-title.headline Настройка оптического развязывающего устройства, dB
             v-card-text.main-content
-                v-subheader.justify-center.text-xs-center.slider-header Пропускание, dB
                 v-slider(v-model="opticalRouter.passing" thumb-label="always" step="5" min="0" max="55")
             v-card-actions
                 v-spacer

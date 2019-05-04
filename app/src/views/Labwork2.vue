@@ -30,45 +30,45 @@
             )
 
             template(v-if="telephoneDevice_1.powerOn")
-                dot-cmpt(:position="{left: 290, top: 100}" :value="0" suffix="dB")
-                dot-cmpt(:position="{left: 387, top: 100}" :value="-3.5" suffix="dB")
-                dot-cmpt(:position="{left: 469, top: 22}" :value="-13" suffix="dB")
-                dot-cmpt(:position="{left: 580, top: 22}" :value="0" suffix="dB")
-                dot-cmpt(:position="{left: 660, top: 103}" :value="-4.5" suffix="dB")
-                dot-cmpt(:position="{left: 747, top: 103}" :value="-34.5" suffix="dB")
-                dot-cmpt(:position="{left: 829, top: 23}" :value="-39" suffix="dB")
-                dot-cmpt(:position="{left: 940, top: 23}" :value="0" suffix="dB")
-                dot-cmpt(:position="{left: 1017, top: 103}" :value="-4.5" suffix="dB")
-                dot-cmpt(:position="{left: 1109, top: 103}" :value="-34.5" suffix="dB")
-                dot-cmpt(:position="{left: 1190, top: 22}" :value="-39" suffix="dB")
-                dot-cmpt(:position="{left: 1300, top: 22}" :value="4.3" suffix="dB")
-                dot-cmpt(:position="{left: 1465, top: 100}" :value="-7" suffix="dB")
-                beam-icon(:position="{left: 565, top: -5}")
-                beam-icon(:position="{left: 1285, top: -5}")
+                dot-cmpt(:position="{left: 65, top: 100}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 160, top: 100}" :value="-3.5" suffix="dB")
+                dot-cmpt(:position="{left: 245, top: 22}" :value="-13" suffix="dB")
+                dot-cmpt(:position="{left: 355, top: 22}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 435, top: 103}" :value="-4.5" suffix="dB")
+                dot-cmpt(:position="{left: 523, top: 103}" :value="-34.5" suffix="dB")
+                dot-cmpt(:position="{left: 605, top: 23}" :value="-39" suffix="dB")
+                dot-cmpt(:position="{left: 710, top: 23}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 790, top: 103}" :value="-4.5" suffix="dB")
+                dot-cmpt(:position="{left: 880, top: 103}" :value="-34.5" suffix="dB")
+                dot-cmpt(:position="{left: 960, top: 22}" :value="-39" suffix="dB")
+                dot-cmpt(:position="{left: 1070, top: 22}" :value="4.3" suffix="dB")
+                dot-cmpt(:position="{left: 1240, top: 100}" :value="-7" suffix="dB")
+                beam-icon(:position="{left: 335, top: -5}")
+                beam-icon(:position="{left: 1055, top: -5}")
 
             template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing === 35")
-                beam-icon(:position="{left: 925, top: -5}")
+                beam-icon(:position="{left: 695, top: -5}")
 
             template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing === 35")
-                beam-icon(:position="{left: 925, top: 150}")
+                beam-icon(:position="{left: 695, top: 150}")
 
             template(v-if="telephoneDevice_2.powerOn")
-                dot-cmpt(:position="{left: 290, top: 100}" :value="-7" suffix="dB")
-                dot-cmpt(:position="{left: 465, top: 177}" :value="4.3" suffix="dB")
-                dot-cmpt(:position="{left: 575, top: 177}" :value="-39" suffix="dB")
-                dot-cmpt(:position="{left: 655, top: 103}" :value="-34.5" suffix="dB")
-                dot-cmpt(:position="{left: 745, top: 103}" :value="-4.5" suffix="dB")
-                dot-cmpt(:position="{left: 825, top: 177}" :value="0" suffix="dB")
-                dot-cmpt(:position="{left: 935, top: 177}" :value="-39" suffix="dB")
-                dot-cmpt(:position="{left: 1015, top: 103}" :value="-34.5" suffix="dB")
-                dot-cmpt(:position="{left: 1105, top: 103}" :value="-4.5" suffix="dB")
-                dot-cmpt(:position="{left: 1185, top: 177}" :value="0" suffix="dB")
-                dot-cmpt(:position="{left: 1295, top: 177}" :value="-13" suffix="dB")
-                dot-cmpt(:position="{left: 1370, top: 100}" :value="-3.5" suffix="dB")
-                dot-cmpt(:position="{left: 1465, top: 100}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 65, top: 100}" :value="-7" suffix="dB")
+                dot-cmpt(:position="{left: 245, top: 177}" :value="4.3" suffix="dB")
+                dot-cmpt(:position="{left: 355, top: 177}" :value="-39" suffix="dB")
+                dot-cmpt(:position="{left: 435, top: 103}" :value="-34.5" suffix="dB")
+                dot-cmpt(:position="{left: 523, top: 103}" :value="-4.5" suffix="dB")
+                dot-cmpt(:position="{left: 605, top: 177}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 710, top: 177}" :value="-39" suffix="dB")
+                dot-cmpt(:position="{left: 790, top: 103}" :value="-34.5" suffix="dB")
+                dot-cmpt(:position="{left: 880, top: 103}" :value="-4.5" suffix="dB")
+                dot-cmpt(:position="{left: 960, top: 177}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 1070, top: 177}" :value="-13" suffix="dB")
+                dot-cmpt(:position="{left: 1150, top: 100}" :value="-3.5" suffix="dB")
+                dot-cmpt(:position="{left: 1240, top: 100}" :value="0" suffix="dB")
 
-                beam-icon(:position="{left: 1285, top: 150}")
-                beam-icon(:position="{left: 565, top: 150}")
+                beam-icon(:position="{left: 1055, top: 150}")
+                beam-icon(:position="{left: 335, top: 150}")
 
 </template>
 
@@ -134,10 +134,14 @@
 <style lang="scss" scoped>
 
     .schemeContainer {
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 50px;
         position: relative;
-        display: flex;
-        justify-content: center;
+
+        $size: 1336;
+        min-width: #{$size}px;
+        max-width: #{$size}px;
     }
 
     .optical-router-device {
@@ -145,8 +149,8 @@
         width: $size;
         height: $size;
         position: absolute;
-        top: 84px;
-        left: 963px;
+        top: 82px;
+        left: 922px;
     }
 
     .telephone-device-dialog_1, .telephone-device-dialog_2 {
@@ -158,12 +162,12 @@
 
     .telephone-device-dialog_1 {
         top: 80px;
-        left: 236px;
+        left: 10px;
     }
 
     .telephone-device-dialog_2 {
         top: 79px;
-        left: 1504px;
+        left: 1276px;
     }
 
 </style>
