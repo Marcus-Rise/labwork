@@ -3,10 +3,10 @@
         div.map-container
             img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")
-            .map-generator-1(@click="generatorSetup_1()")
+            .map-generator-1.mapped-element(@click="generatorSetup_1()")
                 span(:class="{'dark': isDark, 'light': !isDark}" v-if="generatorDots_1")
                     b {{generator1.power}}дБ
-            .map-generator-2(@click="generatorSetup_2()")
+            .map-generator-2.mapped-element(@click="generatorSetup_2()")
                 span(:class="{'dark': isDark, 'light': !isDark}" v-if="generatorDots_2")
                     b {{generator2.power}}дБ
 

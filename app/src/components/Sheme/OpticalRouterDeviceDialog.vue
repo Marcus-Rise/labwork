@@ -4,7 +4,7 @@
             v-card-title.primary-title.headline Настройка оптического развязывающего устройства
             v-card-text.main-content
                 v-subheader.justify-center.text-xs-center.slider-header Пропускание
-                v-slider(v-model="opticalRouter.passing" thumb-label="always" step="5" min="55" max="0")
+                v-slider(v-model="opticalRouter.passing" thumb-label="always" step="5" min="0" max="55")
             v-card-actions
                 v-spacer
                 v-btn(color="green darken-1" flat @click="close") Закрыть
@@ -15,7 +15,7 @@
     import OpticalRouterDevice from "@/models/scheme/OpticalRouterDevice";
 
     @Component
-    export default class TelephoneDeviceDialog extends Vue {
+    export default class OpticalRouterDeviceDialog extends Vue {
         @Prop({type: Boolean, default: false}) show?: boolean;
         @Prop({type: Object, default: null, required: true}) opticalRouter?: OpticalRouterDevice;
 

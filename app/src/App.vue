@@ -19,6 +19,11 @@
 </script>
 
 <style lang="scss">
-
+    .mapped-element {
+        &:hover {
+            background-color: rgba(167, 36, 255, 0.35);
+            cursor: pointer;
+        }
+    }
 </style>
 
