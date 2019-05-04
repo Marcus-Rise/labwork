@@ -98,7 +98,6 @@
         }
 
         mounted() {
-            this.telephoneDevice_2.powerOn = true;
         }
     }
 </script>
