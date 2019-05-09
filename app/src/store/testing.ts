@@ -1,4 +1,5 @@
 import {Module, Mutation, VuexModule} from "vuex-module-decorators";
+import {app} from "@/services/AppService";
 
 @Module
 export default class Testing extends VuexModule {
@@ -6,7 +7,7 @@ export default class Testing extends VuexModule {
     return this._examPassed;
   }
 
-  private _examPassed: boolean = false;
+  private _examPassed: boolean = app.isDevMode;
 
   @Mutation
   passExam(flag: boolean = true) {

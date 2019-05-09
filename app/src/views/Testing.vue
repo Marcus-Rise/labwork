@@ -23,10 +23,12 @@
             v-flex.xs12.text-xs-center
                 v-btn(color="info" @click="restart()" v-if="!quiz.status") Пройти тест еще раз
             v-layout.row.wrap
-                v-flex.sm12.md6.text-xs-center.text-md-right.pr-2
+                v-flex.sm12.text-xs-center
                     router-link(:to="{name: 'labwork'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №1
-                v-flex.sm12.md6.text-xs-center.text-md-left
+                v-flex.sm12.text-xs-center
                     router-link(:to="{name: 'labwork2'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №2
+                v-flex.sm12.text-xs-center
+                    router-link(:to="{name: 'labwork3'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №3
 
 </template>
 

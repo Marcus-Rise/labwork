@@ -9,9 +9,20 @@
     @Component
     export default class BeamIcon extends Vue {
         @Prop({type: Object, required: true}) position?: Position;
+        @Prop({type: Number, default: 0}) rotate?: number;
 
         get styles(): string {
-            return this.position ? `left: ${this.position.left}px; top: ${this.position.top}px` : '';
+            let styles: string = '';
+
+            if (this.position) {
+                styles += `left: ${this.position.left}px; top: ${this.position.top}px;`;
+            }
+
+            if (this.rotate) {
+                styles += ` transform: rotate(${this.rotate}deg);`
+            }
+
+            return styles;
         }
     }
 </script>

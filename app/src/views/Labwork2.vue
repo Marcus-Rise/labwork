@@ -50,7 +50,7 @@
                 beam-icon(:position="{left: 695, top: -5}")
 
             template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing === 35")
-                beam-icon(:position="{left: 695, top: 150}")
+                beam-icon(:position="{left: 553, top: 197}" :rotate="180")
 
             template(v-if="telephoneDevice_2.powerOn")
                 dot-cmpt(:position="{left: 65, top: 100}" :value="-7" suffix="dB")
@@ -67,14 +67,13 @@
                 dot-cmpt(:position="{left: 1150, top: 100}" :value="-3.5" suffix="dB")
                 dot-cmpt(:position="{left: 1240, top: 100}" :value="0" suffix="dB")
 
-                beam-icon(:position="{left: 1055, top: 150}")
-                beam-icon(:position="{left: 335, top: 150}")
+                beam-icon(:position="{left: 195, top: 195}" :rotate="180")
+                beam-icon(:position="{left: 911, top: 195}" :rotate="180")
 
 </template>
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator'
-    import Scheme from "@/components/Sheme/Scheme.vue";
     import {Getter} from "vuex-class";
     import TelephoneDevice from "@/models/scheme/TelephoneDevice";
     import TelephoneDeviceDialog from "@/components/Sheme/TelephoneDeviceDialog.vue";
@@ -149,8 +148,8 @@
         width: $size;
         height: $size;
         position: absolute;
-        top: 82px;
-        left: 922px;
+        top: 83px;
+        left: 736px;
     }
 
     .telephone-device-dialog_1, .telephone-device-dialog_2 {

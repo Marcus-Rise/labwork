@@ -1,8 +1,7 @@
 <template lang="pug">
     v-toolbar
         v-toolbar-side-icon
-        v-toolbar-title
-            router-link.link(:to="{name: 'index'}") Оптический дуплексный усилитель
+        v-toolbar-title Оптический дуплексный усилитель
         v-spacer
         div.d-flex.align-center.justify-center
             v-icon wb_sunny
@@ -11,9 +10,12 @@
         v-spacer
         v-toolbar-items.hidden-sm-and-down
             router-link.navLink.link(:to="{name: 'theory'}" :class="{'light': !isDark, 'dark': isDark}") Теория
-            router-link.navLink.link(v-if="!examPassed" :to="{name: 'testing'}" :class="{'light': !isDark, 'dark': isDark}") Тестирование
-            router-link.navLink.link(v-if="examPassed" :to="{name: 'labwork'}" :class="{'light': !isDark, 'dark': isDark}") Часть 1
-            router-link.navLink.link(v-if="examPassed" :to="{name: 'labwork2'}" :class="{'light': !isDark, 'dark': isDark}") Часть 2
+            template(v-if="!examPassed")
+                router-link.navLink.link(:to="{name: 'testing'}" :class="{'light': !isDark, 'dark': isDark}") Тестирование
+            template(v-else)
+                router-link.navLink.link(:to="{name: 'labwork'}" :class="{'light': !isDark, 'dark': isDark}") Часть 1
+                router-link.navLink.link(:to="{name: 'labwork2'}" :class="{'light': !isDark, 'dark': isDark}") Часть 2
+                router-link.hover.navLink.link(:to="{name: 'labwork3'}" :class="{'light': !isDark, 'dark': isDark}") Часть 3
 </template>
 
 <script lang="ts">
@@ -37,6 +39,9 @@
 
 <style lang="scss" >
     @import "~vuetify-scss";
+    /*.router-link-active {*/
+    /*    color: red !important;*/
+    /*}*/
 
     .themeSwitch {
         margin: 0 10px !important;
