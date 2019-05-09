@@ -23,7 +23,7 @@
             //img(src="@/assets/chart_input.png" width="800px" )
 
         v-flex.xs12.chart
-            line-chart(:chart-data="datacollection" :height="100" :options="options")
+            line-chart(:chart-data="dataCollection" :height="100" :options="options")
 
 </template>
 
@@ -48,11 +48,15 @@
 
         showSetupModal: boolean = false;
         signal: Signal = new Signal();
-        datacollection: object = {};
+        dataCollection: object = {};
 
         options: object = {
             responsive: true,
-
+            elements: {
+                // line: {
+                //     borderColor: 'rgba(153,238,255,0.45)'
+                // },
+            },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -78,35 +82,35 @@
         }
 
         fillData(): void {
-            let points: {x: number, y: number}[] = [];
+            let points: { x: number, y: number }[] = [];
 
-            for (let i=-40; i<=0; i+=5) {
+            for (let i = -40; i <= 0; i += 5) {
                 points.push({
                     x: i,
                     y: this.signal.getOutput(i)
                 })
             }
 
-            this.datacollection = {
+            this.dataCollection = {
                 labels: [...points.map(item => item.x)],
                 datasets: [
                     {
                         fill: false,
                         label: 'P входа, dB',
+                        borderColor: 'rgba(167,36,255,0.49)',
                         backgroundColor: 'rgb(167,36,255)',
                         data: points
                     }, {
                         fill: false,
-                        label: 'Предел',
+                        label: 'Предел, dB',
+                        borderColor: 'rgba(88,255,74,0.49)',
                         backgroundColor: 'rgb(88,255,74)',
-                        data: [...points.map(item => {return {x: item.x, y: 13}})]
+                        data: [...points.map(item => {
+                            return {x: item.x, y: 13}
+                        })]
                     }
                 ]
             }
-        }
-
-        getRandomInt(): number {
-            return Math.floor(Math.random() * (50 - 5 + 1)) + 5
         }
     }
 </script>
