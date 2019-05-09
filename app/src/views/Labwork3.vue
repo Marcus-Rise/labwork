@@ -22,19 +22,22 @@
             SignalSetupDialogCmpt(:show="showSetupModal" @close="closeModal" :signal="signal")
             //img(src="@/assets/chart_input.png" width="800px" )
 
-        v-flex.xs12.chart
-            line-chart(:chart-data="dataCollection" :height="100" :options="options")
+        template(v-if="showCharts")
+            v-flex.xs12.chart
+                line-chart(:chart-data="dataCollection" :height='100' :options="options")
 
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from "vue-property-decorator";
+    import {Component, Vue, Watch} from "vue-property-decorator";
     import {Getter} from "vuex-class";
     import DotCmpt from "@/components/Sheme/DotCmpt.vue";
     import Signal from "@/models/scheme/Signal";
     import SignalSetupDialogCmpt from "@/components/Sheme/SignalSetupDialogCmpt.vue";
     //@ts-ignore
     import LineChart from "@/components/LineChart.js";
+    import {app} from "@/services/AppService";
+    import {ChartData, ChartOptions} from "chart.js";
 
     @Component({
         components: {
@@ -47,10 +50,26 @@
         @Getter isDark?: boolean;
 
         showSetupModal: boolean = false;
+        showCharts: boolean = app.isDevMode;
         signal: Signal = new Signal();
-        dataCollection: object = {};
+        dataCollection: ChartData = {};
 
-        options: object = {
+        options: ChartOptions = {
+            legend: {
+                labels: {
+                    filter: (item, chart) => {
+                        // Logic to remove a particular legend item goes here
+                        return item.text && !item.text.includes('Значение функции');
+                    }
+                }
+            },
+            tooltips: {
+                callbacks: {
+                    // label: (tooltipItem, data) => {
+                    //     return <string | string[]>tooltipItem.yLabel;
+                    // }
+                }
+            },
             responsive: true,
             elements: {
                 // line: {
@@ -58,16 +77,34 @@
                 // },
             },
             scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "P выхода, dB"
+                    },
+                }],
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "P входа, dB"
+                    },
                     ticks: {
                         beginAtZero: true,
                         min: -10,
-                        max: 20
+                        max: 20,
+
                     }
                 }]
             },
 
         };
+
+        @Watch('signal', {deep: true})
+        signalWatcher() {
+            if (!this.showCharts && this.signal.input === 0) {
+                this.showCharts = true;
+            }
+        }
 
         mounted() {
             this.fillData();
@@ -92,11 +129,11 @@
             }
 
             this.dataCollection = {
-                labels: [...points.map(item => item.x)],
+                labels: [...points.map(item => '' + item.x)],
                 datasets: [
                     {
                         fill: false,
-                        label: 'P входа, dB',
+                        label: "Значение функции",
                         borderColor: 'rgba(167,36,255,0.49)',
                         backgroundColor: 'rgb(167,36,255)',
                         data: points
