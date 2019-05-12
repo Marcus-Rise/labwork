@@ -9,8 +9,12 @@
                 v-tooltip(lazy bottom)
                     .optical-router-device.mapped-element(slot="activator")
                     span Отключите подачу сигнала
+                v-tooltip(lazy bottom)
+                    .optical-router-device-duplicate.mapped-element(slot="activator")
+                    span Отключите подачу сигнала
             template(v-else)
                 .optical-router-device.mapped-element(@click="opticalRouterDeviceSetup()")
+                .optical-router-device-duplicate.mapped-element(@click="opticalRouterDeviceSetup()")
 
             TelephoneDeviceDialog(
                 :show="telephoneDeviceDialog_1"
@@ -143,13 +147,21 @@
         max-width: #{$size}px;
     }
 
-    .optical-router-device {
+    .optical-router-device, .optical-router-device-duplicate {
         $size: 50px;
         width: $size;
         height: $size;
         position: absolute;
+    }
+
+    .optical-router-device {
         top: 83px;
         left: 736px;
+    }
+
+    .optical-router-device-duplicate {
+        top: 83px;
+        left: 562px;
     }
 
     .telephone-device-dialog_1, .telephone-device-dialog_2 {
