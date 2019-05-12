@@ -40,7 +40,6 @@
         template(v-if="showOutputSignalChart")
             v-flex.xs12.chart
                 line-chart(:chart-data="outputSignalChartDataCollection" :height='100' :options="outputSignalChartOptions")
-        template(v-if="showAmplitudeArequencyCharacteristicChart")
             v-flex.xs12.chart
                 line-chart(:chart-data="amplitudeArequencyCharacteristicChartDataCollection" :height='100' :options="amplitudeArequencyCharacteristicChartOptions")
 
@@ -71,7 +70,7 @@
 
         supportShow: boolean = true;//!app.isDevMode;
         showSetupModal: boolean = false;
-        showOutputSignalChart: boolean = app.isDevMode;
+        showOutputSignalChart: boolean = false;//app.isDevMode;
         showAmplitudeArequencyCharacteristicChart: boolean = app.isDevMode;
         signal: Signal = new Signal();
         outputSignalChartDataCollection: ChartData = {};
@@ -107,7 +106,7 @@
             },
 
         };
-        amplitudeArequencyCharacteristicChartDataCollection: ChartData = {};
+        // amplitudeArequencyCharacteristicChartDataCollection: ChartData = {};
         amplitudeArequencyCharacteristicChartOptions: ChartOptions = {
             responsive: true,
             legend: {
@@ -163,21 +162,49 @@
             this.showSetupModal = false
         }
 
+        get amplitudeArequencyCharacteristicChartDataCollection(): ChartData {
+            let data: ChartData;
+            let points: { x: number, y: number }[] = [];
+
+            if (this.signal.waveLength === 1560) {
+                for (let i = 1530; i <= 1560; i += 5) {
+                    points.push({
+                        x: i,
+                        y: this.signal.getYwaveLength(i)
+                    })
+                }
+            } else {
+                for (let i = 1530; i <= 1560; i += 5) {
+                    points.push({
+                        x: i,
+                        y: this.getRandomInt(-6, 5)
+                    })
+                }
+            }
+
+            data = {
+                labels: [...points.map(item => '' + item.x)],
+                datasets: [
+                    {
+                        fill: false,
+                        label: "Значение функции",
+                        borderColor: 'rgba(167,36,255,0.49)',
+                        backgroundColor: 'rgb(167,36,255)',
+                        data: points
+                    }
+                ]
+            };
+
+            return data;
+        }
+
         fillData(): void {
             let outputSignalPoints: { x: number, y: number }[] = [];
-            let waveLengthSignalPoints: { x: number, y: number }[] = [];
 
             for (let i = -40; i <= 0; i += 5) {
                 outputSignalPoints.push({
                     x: i,
                     y: this.signal.getOutput(i)
-                })
-            }
-
-            for (let i = 1530; i <= 1560; i += 5) {
-                waveLengthSignalPoints.push({
-                    x: i,
-                    y: this.signal.getYwaveLength(i)
                 })
             }
 
@@ -202,18 +229,11 @@
                 ]
             };
 
-            this.amplitudeArequencyCharacteristicChartDataCollection = {
-                labels: [...waveLengthSignalPoints.map(item => '' + item.x)],
-                datasets: [
-                    {
-                        fill: false,
-                        label: "Значение функции",
-                        borderColor: 'rgba(167,36,255,0.49)',
-                        backgroundColor: 'rgb(167,36,255)',
-                        data: waveLengthSignalPoints
-                    }
-                ]
-            }
+
+        }
+
+        getRandomInt (min: number, max: number) {
+            return Math.floor(Math.random() * (max - min + 1)) + min
         }
     }
 </script>
