@@ -22,9 +22,12 @@
             SignalSetupDialogCmpt(:show="showSetupModal" @close="closeModal" :signal="signal")
             //img(src="@/assets/chart_input.png" width="800px" )
 
-        template(v-if="showCharts")
+        template(v-if="showOutputSignalChart")
             v-flex.xs12.chart
-                line-chart(:chart-data="dataCollection" :height='100' :options="options")
+                line-chart(:chart-data="outputSignalChartDataCollection" :height='100' :options="outputSignalChartOptions")
+        template(v-if="showAmplitudeArequencyCharacteristicChart")
+            v-flex.xs12.chart
+                line-chart(:chart-data="amplitudeArequencyCharacteristicChartDataCollection" :height='100' :options="amplitudeArequencyCharacteristicChartOptions")
 
 </template>
 
@@ -50,11 +53,12 @@
         @Getter isDark?: boolean;
 
         showSetupModal: boolean = false;
-        showCharts: boolean = app.isDevMode;
+        showOutputSignalChart: boolean = app.isDevMode;
+        showAmplitudeArequencyCharacteristicChart: boolean = app.isDevMode;
         signal: Signal = new Signal();
-        dataCollection: ChartData = {};
-
-        options: ChartOptions = {
+        outputSignalChartDataCollection: ChartData = {};
+        outputSignalChartOptions: ChartOptions = {
+            responsive: true,
             legend: {
                 labels: {
                     filter: (item, chart) => {
@@ -62,19 +66,6 @@
                         return item.text && !item.text.includes('Значение функции');
                     }
                 }
-            },
-            tooltips: {
-                callbacks: {
-                    // label: (tooltipItem, data) => {
-                    //     return <string | string[]>tooltipItem.yLabel;
-                    // }
-                }
-            },
-            responsive: true,
-            elements: {
-                // line: {
-                //     borderColor: 'rgba(153,238,255,0.45)'
-                // },
             },
             scales: {
                 xAxes: [{
@@ -98,11 +89,47 @@
             },
 
         };
+        amplitudeArequencyCharacteristicChartDataCollection: ChartData = {};
+        amplitudeArequencyCharacteristicChartOptions: ChartOptions = {
+            responsive: true,
+            legend: {
+                labels: {
+                    filter: (item, chart) => {
+                        // Logic to remove a particular legend item goes here
+                        return item.text && !item.text.includes('Значение функции');
+                    }
+                }
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "λ, нм"
+                    },
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "P выхода, dB"
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                        min: -10,
+                        max: 10,
+                    }
+                }]
+            },
+
+        };
 
         @Watch('signal', {deep: true})
         signalWatcher() {
-            if (!this.showCharts && this.signal.input === 0) {
-                this.showCharts = true;
+            if (!this.showOutputSignalChart && this.signal.input === 0) {
+                this.showOutputSignalChart = true;
+            }
+
+            if (!this.showAmplitudeArequencyCharacteristicChart && this.signal.waveLength === 1560) {
+                this.showAmplitudeArequencyCharacteristicChart = true;
             }
         }
 
@@ -119,32 +146,53 @@
         }
 
         fillData(): void {
-            let points: { x: number, y: number }[] = [];
+            let outputSignalPoints: { x: number, y: number }[] = [];
+            let waveLengthSignalPoints: { x: number, y: number }[] = [];
 
             for (let i = -40; i <= 0; i += 5) {
-                points.push({
+                outputSignalPoints.push({
                     x: i,
                     y: this.signal.getOutput(i)
                 })
             }
 
-            this.dataCollection = {
-                labels: [...points.map(item => '' + item.x)],
+            for (let i = 1530; i <= 1560; i += 5) {
+                waveLengthSignalPoints.push({
+                    x: i,
+                    y: this.signal.getYwaveLength(i)
+                })
+            }
+
+            this.outputSignalChartDataCollection = {
+                labels: [...outputSignalPoints.map(item => '' + item.x)],
                 datasets: [
                     {
                         fill: false,
                         label: "Значение функции",
                         borderColor: 'rgba(167,36,255,0.49)',
                         backgroundColor: 'rgb(167,36,255)',
-                        data: points
+                        data: outputSignalPoints
                     }, {
                         fill: false,
                         label: 'Предел, dB',
                         borderColor: 'rgba(88,255,74,0.49)',
                         backgroundColor: 'rgb(88,255,74)',
-                        data: [...points.map(item => {
+                        data: [...outputSignalPoints.map(item => {
                             return {x: item.x, y: 13}
                         })]
+                    }
+                ]
+            };
+
+            this.amplitudeArequencyCharacteristicChartDataCollection = {
+                labels: [...waveLengthSignalPoints.map(item => '' + item.x)],
+                datasets: [
+                    {
+                        fill: false,
+                        label: "Значение функции",
+                        borderColor: 'rgba(167,36,255,0.49)',
+                        backgroundColor: 'rgb(167,36,255)',
+                        data: waveLengthSignalPoints
                     }
                 ]
             }

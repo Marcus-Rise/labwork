@@ -1,4 +1,12 @@
 export default class Signal {
+    get waveLength(): number {
+        return this._waveLength;
+    }
+
+    set waveLength(value: number) {
+        this._waveLength = value;
+    }
+
     get output(): number {
         return this.getOutput(this._input);
     }
@@ -11,10 +19,13 @@ export default class Signal {
     set input(value: number) {
         this._input = value;
     }
+
     private _input: number;
+    private _waveLength: number;
 
     constructor() {
         this._input = -40;
+        this._waveLength = 1530;
     }
 
     getOutput(input: number): number {
@@ -49,6 +60,38 @@ export default class Signal {
                 value = 15;
                 break;
 
+            default:
+                value = 0;
+        }
+
+        return value;
+    }
+
+    getYwaveLength(x: number): number {
+        let value: number;
+
+        switch (x) {
+            case 1530:
+                value = -6;
+                break;
+            case 1535:
+                value = -1;
+                break;
+            case 1540:
+                value = 3;
+                break;
+            case 1545:
+                value = 5;
+                break;
+            case 1550:
+                value = 2;
+                break;
+            case 1555:
+                value = 0;
+                break;
+            case 1560:
+                value = 3;
+                break;
             default:
                 value = 0;
         }
