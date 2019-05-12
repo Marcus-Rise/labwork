@@ -7,11 +7,11 @@
                     ul
                         li Г – генератор оптического излучения;
                         li ОРУ – оптическое развязывающее устройство.
-                v-card-title.primary-title.headline Задача
+                v-card-title.primary-title.headline Задачи
                 v-card-text
                     ol
                         li Изменяйте уровень оптического излучения и длину волны;
-                        li Зарисуйте схему. Изменяя параметры генератора наблюдайте как изменяется уровень сигнала при прохождении через линию.
+                        li Зарисуйте схему. Изменяя параметры генератора, наблюдайте, как изменяется уровень сигнала при прохождении через линию.
                 v-card-title.primary-title.headline Определить
                 v-card-text
                     ol
@@ -25,7 +25,8 @@
                             symbol-cmpt(value="α" undo-suffix="ЛС" :font-size="1.5")
                             |, dB
                         li Запишите полученные результаты (они пригодятся при расчетах).
-
+                v-card-title.primary-title.headline Вы должны понимать
+                v-card-text Как изменяется мощность сигнала при прохождении через линию.
         div.map-container
             img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")

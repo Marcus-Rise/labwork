@@ -2,18 +2,30 @@
     v-layout.row.wrap
         v-flex.xs12
             task-modal-window(v-model="supportShow")
-                v-card-title.primary-title.headline.
-                    Оптический линейный тракт
-                    *оконечными устройствами являются трансформаторные дифференциальные системы.
+                v-card-title.primary-title.headline Оптический дуплексный усилитель
                 v-card-text
                     ul
-                        li Г – генератор оптического излучения;
-                        li ОРУ – оптическое развязывающее устройство.
-                v-card-title.primary-title.headline Задача
+                        li
+                            symbol-cmpt(value="P" under-suffix="1")
+                            |, dB - входной уровень сигнала;
+                        li
+                            symbol-cmpt(value="P" under-suffix="2")
+                            |, dB - выходной уровень сигнала.
+                v-card-title.primary-title.headline Задачи
                 v-card-text
                     ol
-                        li Изменяйте уровень оптического излучения и длину волны;
-                        li Зарисуйте схему. Изменяя параметры генератора наблюдайте как изменяется уровень сигнала при прохождении через линию.
+                        li
+                            |Изменяйте&nbsp;
+                            symbol-cmpt(value="P" under-suffix="1")
+                            |, dB (-40 dB до 0 dB с шагом 5 dB). Запишите полученный уровень
+                            symbol-cmpt(value="P" under-suffix="2")
+                            |, dB. Определите коэффициент усиления для каждого уровня. Получите и зарисуйте график зависимости уровней сигналов.
+                        li Получите АЧХ (второй график). Попробуйте изменить длину волны оптического излучения в C – диапазоне. Наблюдайте за изменением графика.
+                v-card-title.primary-title.headline Вы должны понимать
+                v-card-text
+                    ul
+                        li Как изменяется коэффициент усиления;
+                        li Что такое порог и когда он наступает.
 
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
@@ -56,9 +68,11 @@
     import {app} from "@/services/AppService";
     import {ChartData, ChartOptions} from "chart.js";
     import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
+    import SymbolCmpt from "@/components/SymbolCmpt.vue";
 
     @Component({
         components: {
+            SymbolCmpt,
             TaskModalWindow,
             LineChart,
             SignalSetupDialogCmpt,
@@ -106,7 +120,6 @@
             },
 
         };
-        // amplitudeArequencyCharacteristicChartDataCollection: ChartData = {};
         amplitudeArequencyCharacteristicChartOptions: ChartOptions = {
             responsive: true,
             legend: {
