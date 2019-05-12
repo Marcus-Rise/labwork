@@ -1,5 +1,7 @@
 <template lang="pug">
     v-layout.row.wrap.justify-center
+        v-flex.xs12
+            task-modal-window(v-model="supportShow")
         div.map-container
             img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")
@@ -51,12 +53,20 @@
     import DotCmpt from "@/components/Sheme/DotCmpt.vue";
     import {Getter} from "vuex-class";
     import SchemeGenerator from "@/models/scheme/SchemeGenerator";
+    import {app} from "@/services/AppService";
+    import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
 
     @Component({
-        components: {DotCmpt, GeneratorSetupDialogCmpt}
+        components: {
+            DotCmpt,
+            GeneratorSetupDialogCmpt,
+            TaskModalWindow,
+        }
     })
     export default class Labwork extends Vue {
         @Getter public isDark?: boolean;
+
+        supportShow: boolean = !app.isDevMode;
         generatorDialog_1: boolean = false;
         generatorDialog_2: boolean = false;
         generatorDots_1: boolean = false;

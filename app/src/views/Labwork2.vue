@@ -1,5 +1,7 @@
 <template lang="pug">
     v-layout.row.wrap
+        v-flex.xs12
+            task-modal-window(v-model="supportShow")
         v-flex.xs12.schemeContainer
             img(src="@/assets/scheme/dark2.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light2.png" usemap="#image-map" v-if="!isDark")
@@ -82,20 +84,26 @@
     import TelephoneDevice from "@/models/scheme/TelephoneDevice";
     import TelephoneDeviceDialog from "@/components/Sheme/TelephoneDeviceDialog.vue";
     import DotCmpt from "@/components/Sheme/DotCmpt.vue";
-    import BeamIcon from "@/components/BeamIcon.vue";
+    import BeamIcon from "@/components/Sheme/BeamIcon.vue";
     import OpticalRouterDevice from "@/models/scheme/OpticalRouterDevice";
     import OpticalRouterDeviceDialog from "@/components/Sheme/OpticalRouterDeviceDialog.vue";
+    import {app} from "@/services/AppService";
+    import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
 
     @Component({
         components: {
             OpticalRouterDeviceDialog,
             BeamIcon,
             DotCmpt,
-            TelephoneDeviceDialog
+            TelephoneDeviceDialog,
+            TaskModalWindow,
+
         }
     })
     export default class Labwork2 extends Vue {
         @Getter isDark?: boolean;
+
+        supportShow: boolean = !app.isDevMode;
         telephoneDeviceDialog_1: boolean = false;
         telephoneDeviceDialog_2: boolean = false;
         opticalRouterDeviceDialog: boolean = false;

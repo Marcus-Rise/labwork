@@ -1,5 +1,8 @@
 <template lang="pug">
     v-layout.row.wrap
+        v-flex.xs12
+            task-modal-window(v-model="supportShow")
+
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light3.png" usemap="#image-map" v-if="!isDark")
@@ -41,9 +44,11 @@
     import LineChart from "@/components/LineChart.js";
     import {app} from "@/services/AppService";
     import {ChartData, ChartOptions} from "chart.js";
+    import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
 
     @Component({
         components: {
+            TaskModalWindow,
             LineChart,
             SignalSetupDialogCmpt,
             DotCmpt,
@@ -52,6 +57,7 @@
     export default class Labwork3 extends Vue {
         @Getter isDark?: boolean;
 
+        supportShow: boolean = !app.isDevMode;
         showSetupModal: boolean = false;
         showOutputSignalChart: boolean = app.isDevMode;
         showAmplitudeArequencyCharacteristicChart: boolean = app.isDevMode;
