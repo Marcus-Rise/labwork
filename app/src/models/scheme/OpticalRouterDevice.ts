@@ -9,7 +9,7 @@ export default class OpticalRouterDevice {
     private _passing: number;
 
     constructor() {
-        this._passing = 25;
+        this._passing = 55;
     }
 
 }

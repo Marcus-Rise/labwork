@@ -46,10 +46,10 @@
                 beam-icon(:position="{left: 335, top: -5}")
                 beam-icon(:position="{left: 1055, top: -5}")
 
-            template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing === 35")
+            template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing <= 35")
                 beam-icon(:position="{left: 695, top: -5}")
 
-            template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing === 35")
+            template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing <= 35")
                 beam-icon(:position="{left: 553, top: 197}" :rotate="180")
 
             template(v-if="telephoneDevice_2.powerOn")
