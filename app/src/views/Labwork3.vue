@@ -6,19 +6,19 @@
                 v-card-text
                     ul
                         li
-                            symbol-cmpt(value="P" under-suffix="1")
+                            symbol-cmpt(value="P" undo-suffix="1" :font-size-undo="0.6")
                             |, dB - входной уровень сигнала;
                         li
-                            symbol-cmpt(value="P" under-suffix="2")
+                            symbol-cmpt(value="P" undo-suffix="2" :font-size-undo="0.6")
                             |, dB - выходной уровень сигнала.
                 v-card-title.primary-title.headline Задачи
                 v-card-text
                     ol
                         li
                             |Изменяйте&nbsp;
-                            symbol-cmpt(value="P" under-suffix="1")
+                            symbol-cmpt(value="P" undo-suffix="1" :font-size-undo="0.6")
                             |, dB (-40 dB до 0 dB с шагом 5 dB). Запишите полученный уровень
-                            symbol-cmpt(value="P" under-suffix="2")
+                            symbol-cmpt(value="P" undo-suffix="2" :font-size-undo="0.6")
                             |, dB. Определите коэффициент усиления для каждого уровня. Получите и зарисуйте график зависимости уровней сигналов.
                         li Получите АЧХ (второй график). Попробуйте изменить длину волны оптического излучения в C – диапазоне. Наблюдайте за изменением графика.
                 v-card-title.primary-title.headline Вы должны понимать
