@@ -78,19 +78,19 @@ export default class Signal {
                 value = -1;
                 break;
             case 1540:
-                value = 3;
-                break;
-            case 1545:
-                value = 5;
-                break;
-            case 1550:
-                value = 2;
-                break;
-            case 1555:
                 value = 0;
                 break;
+            case 1545:
+                value = -2;
+                break;
+            case 1550:
+                value = 0;
+                break;
+            case 1555:
+                value = 2;
+                break;
             case 1560:
-                value = 3;
+                value = -3;
                 break;
             default:
                 value = 0;
