@@ -2,6 +2,30 @@
     v-layout.row.wrap.justify-center
         v-flex.xs12
             task-modal-window(v-model="supportShow")
+                v-card-title.primary-title.headline Оптический линейный тракт
+                v-card-text
+                    ul
+                        li Г – генератор оптического излучения;
+                        li ОРУ – оптическое развязывающее устройство.
+                v-card-title.primary-title.headline Задача
+                v-card-text
+                    ol
+                        li Изменяйте уровень оптического излучения и длину волны;
+                        li Зарисуйте схему. Изменяя параметры генератора наблюдайте как изменяется уровень сигнала при прохождении через линию.
+                v-card-title.primary-title.headline Определить
+                v-card-text
+                    ol
+                        li
+                            |Затухание ОРУ в направлении пропускания,&nbsp;
+                            symbol-cmpt(value="α" undo-suffix="ОРУ" :font-size="1.5")
+                            |, dB.
+                        li Коэффициент усиления усилителя, S, dB
+                        li
+                            |Затухание линии,&nbsp;
+                            symbol-cmpt(value="α" undo-suffix="ЛС" :font-size="1.5")
+                            |, dB
+                        li Запишите полученные результаты (они пригодятся при расчетах).
+
         div.map-container
             img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")
@@ -55,9 +79,11 @@
     import SchemeGenerator from "@/models/scheme/SchemeGenerator";
     import {app} from "@/services/AppService";
     import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
+    import SymbolCmpt from "@/components/SymbolCmpt.vue";
 
     @Component({
         components: {
+            SymbolCmpt,
             DotCmpt,
             GeneratorSetupDialogCmpt,
             TaskModalWindow,
@@ -66,7 +92,7 @@
     export default class Labwork extends Vue {
         @Getter public isDark?: boolean;
 
-        supportShow: boolean = !app.isDevMode;
+        supportShow: boolean = true;//!app.isDevMode;
         generatorDialog_1: boolean = false;
         generatorDialog_2: boolean = false;
         generatorDots_1: boolean = false;

@@ -3,6 +3,7 @@
         v-flex.xs12
             task-modal-window(v-model="supportShow")
 
+
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light3.png" usemap="#image-map" v-if="!isDark")
@@ -57,7 +58,7 @@
     export default class Labwork3 extends Vue {
         @Getter isDark?: boolean;
 
-        supportShow: boolean = !app.isDevMode;
+        supportShow: boolean = true;//!app.isDevMode;
         showSetupModal: boolean = false;
         showOutputSignalChart: boolean = app.isDevMode;
         showAmplitudeArequencyCharacteristicChart: boolean = app.isDevMode;

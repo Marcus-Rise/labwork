@@ -12,9 +12,7 @@
             span Справка
         v-dialog(v-model="show" width="500" persistent)
             v-card
-                v-card-title.primary-title.headline Справка
-                v-card-text
-                    slot
+                slot
                 v-card-actions
                     v-spacer
                     v-btn(color="green darken-1" flat @click="close") Закрыть
