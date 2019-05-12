@@ -2,6 +2,40 @@
     v-layout.row.wrap
         v-flex.xs12
             task-modal-window(v-model="supportShow")
+                v-card-title.primary-title.headline.
+                    Оптический линейный тракт
+                    *оконечными устройствами являются трансформаторные дифференциальные системы.
+                v-card-text
+                    ul
+                        li ТА – телефонный аппарат;
+                        li ТУ – транзитный удлинитель.
+                v-card-title.primary-title.headline Задача
+                v-card-text
+                    ol
+                        li Подайте сигнал на ТА;
+                        li Зарисуйте схему;
+                        li Наблюдайте как изменяется уровень сигнала при прохождении через линию.
+                v-card-title.primary-title.headline Определить
+                v-card-text
+                    ol
+                        li Какое затухание вносит ТУ, дифференциальная система, линия передачи;
+                        li Коэффициент усиления усилителя;
+                        li Отмените подачу сигнала;
+                        li
+                            |Изменяйте переходное затухание ОРУ с 55 dB до 0 dB с шагом 5 dB;
+                            br
+                            |* 55 dB – это значение затухания по умолчанию (идеальное значение).
+                            |Вам необходимо уменьшать его до того момента, пока не произойдет генерация.
+                            |Запишите это значение. Переходное затухание, A, dB
+                        li
+                            |По полученным значениям (из п.1 и п.2) рассчитайте запас устойчивости ОЗС (X)
+                            |, устойчивость ОЗС (δ), рабочее и критическое усиление.
+                            br
+                            |Сделайте вывод при каких значениях ОЗС устойчива/не устойчива
+                            br
+                            |* Коэффициент усиление усилителя в этой схеме не изменяется.
+
+
         v-flex.xs12.schemeContainer
             img(src="@/assets/scheme/dark2.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light2.png" usemap="#image-map" v-if="!isDark")
@@ -89,12 +123,14 @@
     import OpticalRouterDeviceDialog from "@/components/Sheme/OpticalRouterDeviceDialog.vue";
     import {app} from "@/services/AppService";
     import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
+    import SymbolCmpt from "@/components/SymbolCmpt.vue";
 
     @Component({
         components: {
             OpticalRouterDeviceDialog,
             BeamIcon,
             DotCmpt,
+            SymbolCmpt,
             TelephoneDeviceDialog,
             TaskModalWindow,
 
@@ -103,7 +139,7 @@
     export default class Labwork2 extends Vue {
         @Getter isDark?: boolean;
 
-        supportShow: boolean = !app.isDevMode;
+        supportShow: boolean = true;//!app.isDevMode;
         telephoneDeviceDialog_1: boolean = false;
         telephoneDeviceDialog_2: boolean = false;
         opticalRouterDeviceDialog: boolean = false;

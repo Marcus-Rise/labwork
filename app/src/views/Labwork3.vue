@@ -2,7 +2,18 @@
     v-layout.row.wrap
         v-flex.xs12
             task-modal-window(v-model="supportShow")
-
+                v-card-title.primary-title.headline.
+                    Оптический линейный тракт
+                    *оконечными устройствами являются трансформаторные дифференциальные системы.
+                v-card-text
+                    ul
+                        li Г – генератор оптического излучения;
+                        li ОРУ – оптическое развязывающее устройство.
+                v-card-title.primary-title.headline Задача
+                v-card-text
+                    ol
+                        li Изменяйте уровень оптического излучения и длину волны;
+                        li Зарисуйте схему. Изменяя параметры генератора наблюдайте как изменяется уровень сигнала при прохождении через линию.
 
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
