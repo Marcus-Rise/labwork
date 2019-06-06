@@ -22,18 +22,18 @@
                         li Коэффициент усиления усилителя;
                         li Отмените подачу сигнала;
                         li
-                            |Изменяйте переходное затухание ОРУ с 55 dB до 0 dB с шагом 5 dB;
+                            | Изменяйте переходное затухание ОРУ с 55 dB до 0 dB с шагом 5 dB;
                             br
-                            |* 55 dB – это значение затухания по умолчанию (идеальное значение).
-                            |Вам необходимо уменьшать его до того момента, пока не произойдет генерация.
-                            |Запишите это значение. Переходное затухание, A, dB
+                            | * 55 dB – это значение затухания по умолчанию (идеальное значение).
+                            | Вам необходимо уменьшать его до того момента, пока не произойдет генерация.
+                            | Запишите это значение. Переходное затухание, A, dB
                         li
-                            |По полученным значениям (из п.1 и п.2) рассчитайте запас устойчивости ОЗС (X)
-                            |, устойчивость ОЗС (δ), рабочее и критическое усиление.
+                            | По полученным значениям (из п.1 и п.2) рассчитайте запас устойчивости ОЗС (X)
+                            | , устойчивость ОЗС (δ), рабочее и критическое усиление.
                             br
-                            |Сделайте вывод при каких значениях ОЗС устойчива/не устойчива
+                            | Сделайте вывод при каких значениях ОЗС устойчива/не устойчива
                             br
-                            |* Коэффициент усиление усилителя в этой схеме не изменяется.
+                            | * Коэффициент усиление усилителя в этой схеме не изменяется.
                 v-card-title.primary-title.headline Вы должны понимать
                 v-card-text
                     ul
@@ -90,7 +90,7 @@
                 dot-cmpt(:position="{left: 1070, top: 22}" :value="4.3" suffix="dB")
                 dot-cmpt(:position="{left: 1240, top: 100}" :value="-7" suffix="dB")
                 beam-icon(:position="{left: 335, top: -5}")
-                beam-icon(:position="{left: 1055, top: -5}")
+                sinusoid-icon(:position="{left: 1055, top: -30}")
 
             template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing <= 35")
                 beam-icon(:position="{left: 695, top: -5}")
@@ -113,7 +113,7 @@
                 dot-cmpt(:position="{left: 1150, top: 100}" :value="-3.5" suffix="dB")
                 dot-cmpt(:position="{left: 1240, top: 100}" :value="0" suffix="dB")
 
-                beam-icon(:position="{left: 195, top: 195}" :rotate="180")
+                sinusoid-icon(:position="{left: 195, top: 205}")
                 beam-icon(:position="{left: 911, top: 195}" :rotate="180")
 
 </template>
@@ -130,9 +130,11 @@
     import {app} from "@/services/AppService";
     import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
     import SymbolCmpt from "@/components/SymbolCmpt.vue";
+    import SinusoidIcon from "@/components/Sheme/SinusoidIcon.vue";
 
     @Component({
         components: {
+            SinusoidIcon,
             OpticalRouterDeviceDialog,
             BeamIcon,
             DotCmpt,
@@ -179,7 +181,11 @@
             }
         }
 
-        mounted() {
+        created() {
+            if (app.isDevMode) {
+                this.telephoneDevice_1.powerOn = true;
+                this.supportShow = false;
+            }
         }
     }
 </script>
