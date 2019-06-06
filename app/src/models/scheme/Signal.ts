@@ -71,6 +71,9 @@ export default class Signal {
         let value: number;
 
         switch (x) {
+            case 1520:
+                value = -10;
+                break;
             case 1530:
                 value = -6;
                 break;
@@ -91,6 +94,9 @@ export default class Signal {
                 break;
             case 1560:
                 value = -3;
+                break;
+            case 1570:
+                value = -10;
                 break;
             default:
                 value = 0;
