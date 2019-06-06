@@ -46,7 +46,7 @@
     }
 
     .sinusoid-icon {
-        background-image: url("/img/sinusoid.png");
+        background-image: url("../../assets/scheme/sinusoid.png");
         background-size: 300px;
         background-repeat: repeat-x;
         animation: background 70s infinite;
