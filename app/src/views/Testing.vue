@@ -7,13 +7,31 @@
             v-flex.xs12(v-if="question")
                 .text-xs-center
                     h1 Вопрос {{questionIndexCurrent}}. {{question.title}}
-                v-container
-                    .answerList
+            template(v-if="question")
+                v-flex.xs12(v-if="question.img")
+                    v-container
+                        v-img.grey.lighten-2(
+                            :src="question.img"
+                            :lazy-src="question.img"
+                            aspect-ratio="1"
+                            height="300"
+                        )
+                v-flex.xs12
+                    v-container.answerList
                         ul
                             li(v-for="(answer, index) in question.answers"
                                 :class="{'light': !isDark, 'dark': isDark}"
                                 @click="answerQuestion(answer)"
-                            ) {{index + 1}}. {{answer.title}}
+                            )
+                                p {{index + 1}}. {{answer.title}}
+                                v-img(
+                                    v-if="answer.img"
+                                    :src="answer.img"
+                                    :lazy-src="answer.img"
+                                    height="250"
+                                    width="auto"
+                                    contain
+                                )
 
         v-layout.row.justify-center.wrap(v-if="quiz && isComplete")
             v-flex.xs12
@@ -137,6 +155,10 @@
 
                 &:hover {
                     cursor: pointer;
+                }
+
+                p {
+                    margin: 0;
                 }
             }
         }

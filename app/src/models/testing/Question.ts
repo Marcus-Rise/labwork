@@ -5,9 +5,6 @@ export default class Question {
     return this._img;
   }
 
-  set img(value: string | null) {
-    this._img = value;
-  }
   get status(): boolean | null {
     return this._status;
   }
@@ -26,7 +23,7 @@ export default class Question {
 
   private readonly _title: string;
   private readonly _answers: Answer[] = [];
-  private _img: string | null;
+  private readonly _img: string | null;
   private _status: boolean | null = null;
 
   constructor(obj: QuestionApi)
