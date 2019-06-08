@@ -23,8 +23,8 @@ export default class Quiz {
       for (const question of questions)
         this.addQuestion(question)
     } else {
-      this.percentToPass = questions["процент правильных ответов"];
-      for (const question of questions.вопросы)
+      this.percentToPass = questions["need_to_win"];
+      for (const question of questions.questions)
         this.addQuestion(question)
     }
   }
@@ -63,6 +63,6 @@ export default class Quiz {
 }
 
 interface QuizApi {
-  "процент правильных ответов": number
-  "вопросы": QuestionApi[]
+  "need_to_win": number
+  "questions": QuestionApi[]
 }

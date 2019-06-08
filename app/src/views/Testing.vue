@@ -34,7 +34,7 @@
 
 <script lang="ts">
     import {Component, Vue, Watch} from 'vue-property-decorator';
-    import data from '@/models/testing/questions.json';
+    import data from '@/assets/questions.json';
     import Quiz from "@/models/testing/Quiz";
     import Question from "@/models/testing/Question";
     import {Getter, Mutation} from "vuex-class";

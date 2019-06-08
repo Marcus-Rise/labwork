@@ -1,0 +1,34 @@
+{
+  "need_to_win": 90,
+  "questions": [
+    {
+      "title": "первый вопрос?",
+      "answers": [
+        {
+          "title": "неtrue ответ",
+          "true": false
+        },{
+          "title": "true ответ",
+          "true": true
+        },{
+          "title": "неtrue ответ 2",
+          "true": false
+        }
+      ]
+    },{
+      "title": "aaaawwdwdwdwd?",
+      "answers": [
+        {
+          "title": "неtrue ответ",
+          "true": false
+        },{
+          "title": "true ответ",
+          "true": true
+        },{
+          "title": "неtrue ответ 2",
+          "true": false
+        }
+      ]
+    }
+  ]
+}

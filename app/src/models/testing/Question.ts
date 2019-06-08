@@ -1,6 +1,13 @@
 import Answer, {AnswerApi} from "./Answer";
 
 export default class Question {
+  get img(): string | null {
+    return this._img;
+  }
+
+  set img(value: string | null) {
+    this._img = value;
+  }
   get status(): boolean | null {
     return this._status;
   }
@@ -19,16 +26,19 @@ export default class Question {
 
   private readonly _title: string;
   private readonly _answers: Answer[] = [];
+  private _img: string | null;
   private _status: boolean | null = null;
 
   constructor(obj: QuestionApi)
-  constructor(titleOrApiObj: string | QuestionApi, answers?: Answer[]) {
+  constructor(titleOrApiObj: string | QuestionApi, img?: string, answers?: Answer[]) {
     if (typeof titleOrApiObj === "string") {
       this._title = titleOrApiObj;
       this.addAnswers(answers ? answers : []);
+      this._img = img || null;
     } else {
-      this._title = titleOrApiObj.заголовок;
-      this.addAnswers(titleOrApiObj.ответы);
+      this._title = titleOrApiObj.title;
+      this.addAnswers(titleOrApiObj.answers);
+      this._img = titleOrApiObj.img || null;
     }
   }
 
@@ -63,6 +73,7 @@ export default class Question {
 }
 
 export interface QuestionApi {
-  "заголовок": string
-  "ответы": AnswerApi[]
+  title: string;
+  answers: AnswerApi[];
+  img?: string;
 }

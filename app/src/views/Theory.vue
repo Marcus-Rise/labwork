@@ -12,7 +12,7 @@
                     persistent-hint                )
                 v-icon(large @click="next") chevron_right
             v-flex(sm12)
-                pdf(src="theory.pdf" :resize="true" :scale="0.5" :page="parseInt(page)" @numpages="getPdf")
+                pdf(src="@/assets/theory.pdf" :resize="true" :scale="0.5" :page="parseInt(page)" @numpages="getPdf")
             v-flex.actions(sm12 layout row justify-space-between align-center)
                 v-icon(large @click="prev") chevron_left
                 v-text-field.input(

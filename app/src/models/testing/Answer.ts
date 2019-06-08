@@ -17,13 +17,13 @@ export default class Answer {
       this._title = titleOrApiObj;
       this._isRight = isRight ? isRight : false;
     } else {
-      this._title = titleOrApiObj.заголовок;
-      this._isRight = titleOrApiObj.правильный;
+      this._title = titleOrApiObj.title;
+      this._isRight = titleOrApiObj.true;
     }
   }
 }
 
 export interface AnswerApi {
-  "заголовок": string
-  "правильный": boolean
+  title: string
+  true: boolean
 }
