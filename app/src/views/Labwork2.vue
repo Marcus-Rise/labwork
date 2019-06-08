@@ -90,6 +90,7 @@
                 dot-cmpt(:position="{left: 1070, top: 22}" :value="4.3" suffix="dB")
                 dot-cmpt(:position="{left: 1240, top: 100}" :value="-7" suffix="dB")
                 beam-icon(:position="{left: 335, top: -5}")
+                sinusoid-icon(:position="{left: 155, top: -30}")
                 sinusoid-icon(:position="{left: 1055, top: -30}")
 
             template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing <= 35")
@@ -113,7 +114,8 @@
                 dot-cmpt(:position="{left: 1150, top: 100}" :value="-3.5" suffix="dB")
                 dot-cmpt(:position="{left: 1240, top: 100}" :value="0" suffix="dB")
 
-                sinusoid-icon(:position="{left: 195, top: 205}")
+                sinusoid-icon(:position="{left: 170, top: 215}")
+                sinusoid-icon(:position="{left: 1080, top: 215}")
                 beam-icon(:position="{left: 911, top: 195}" :rotate="180")
 
 </template>
@@ -183,7 +185,7 @@
 
         created() {
             if (app.isDevMode) {
-                this.telephoneDevice_1.powerOn = true;
+                this.telephoneDevice_2.powerOn = true;
                 this.supportShow = false;
             }
         }
