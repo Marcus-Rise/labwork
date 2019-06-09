@@ -1,6 +1,8 @@
 <template lang="pug">
     v-toolbar
-        v-toolbar-side-icon
+        v-toolbar-side-icon(
+            @click="toMain"
+        )
         v-toolbar-title Оптический дуплексный усилитель
         v-spacer
         div.d-flex.align-center.justify-center
@@ -20,7 +22,8 @@
 
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
-    import {Getter, Mutation, } from "vuex-class";
+    import {Getter, Mutation,} from "vuex-class";
+    import router from "@/router";
 
     @Component
     export default class HeaderCmpt extends Vue {
@@ -30,6 +33,9 @@
 
         isThemeDark: boolean = false;
 
+        toMain(): void {
+            router.replace("/")
+        }
 
         mounted() {
             this.isThemeDark = this.$store.getters.isDark;
@@ -37,7 +43,7 @@
     }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
     @import "~vuetify-scss";
     /*.router-link-active {*/
     /*    color: red !important;*/

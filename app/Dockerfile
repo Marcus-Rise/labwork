@@ -6,11 +6,13 @@ RUN mkdir -p /usr/src/app \
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
+
 RUN apk add --no-cache --virtual .gyp \
 		python \
 		make \
-		g++ \
-	&& yarn
+		g++
+
+RUN yarn
 
 COPY . ./
 

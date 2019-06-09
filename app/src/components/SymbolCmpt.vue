@@ -1,6 +1,7 @@
 <template lang="pug">
     .d-inline-block(:style="stylesMain")
-        span.main {{value}}
+        span.main
+            slot {{value}}
         span.undo-suffix(v-if="undoSuffix" :style="stylesUndo") {{undoSuffix}}
 </template>
 
@@ -10,7 +11,7 @@
     @Component
     export default class SymbolCmpt extends Vue {
         @Prop({type: String}) value?: string;
-        @Prop({type: Number}) fontSize?: number;
+        @Prop({type: Number, default: 1.5}) fontSize?: number;
         @Prop({type: String}) undoSuffix?: string;
         @Prop({type: Number, default: 0.4}) fontSizeUndo?: number;
 

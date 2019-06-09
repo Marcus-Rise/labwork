@@ -1,32 +1,48 @@
 <template lang="pug">
-    v-layout.row.wrap
+    v-layout(row wrap)
         v-flex.xs12
             task-modal-window(v-model="supportShow")
                 v-card-title.primary-title.headline Оптический дуплексный усилитель
+                v-card-title.primary-title.headline Цель:
+                v-card-text.
+                    Исследовать оптический
+                    параметры,
+                    получить
+                    усилитель,
+                    амплитудную
+                    и
+                    изучить
+                    основные
+                    амплитудно-частотную
+                    характеристику.
+                v-card-title.primary-title.headline Макет:
+                v-card-text
+                    | Оптический усилитель на оптическом волокне, легированном
+                    | эрбием (EDFA).&nbsp;
+                    symbol-cmpt(undoSuffix="1") P
+                    | , dB и
+                    symbol-cmpt(undoSuffix="2") P
+                    | , dB входной и выходной уровень мощности
+                    | сигнала соответственно.
+                v-card-title.primary-title.headline Задачи:
                 v-card-text
                     ul
                         li
-                            symbol-cmpt(value="P" undo-suffix="1" :font-size-undo="0.6")
-                            |, dB - входной уровень сигнала;
-                        li
-                            symbol-cmpt(value="P" undo-suffix="2" :font-size-undo="0.6")
-                            |, dB - выходной уровень сигнала.
-                v-card-title.primary-title.headline Задачи
+                            | Получите амплитудно-частотную и амплитудную характеристику.
+                            | Для этого изменяйте длину волны оптического излучения в C –
+                            | диапазоне и уровень мощности входного сигнала&nbsp;
+                            symbol-cmpt(undoSuffix="1") P
+                            |, dB (-40 dB до 0 dB с шагом 5 dB). Запишите полученный уровень
+                            symbol-cmpt(undoSuffix="2") P
+                            |, dB. Результаты оформите в таблицу.
+                        li Определите усиление усилителя для каждого уровня.
+                        li Получите и зарисуйте графики.
+                        li Определите порог усиления.
+                v-card-title.primary-title.headline Вы должны понимать:
                 v-card-text
                     ol
-                        li
-                            |Изменяйте&nbsp;
-                            symbol-cmpt(value="P" undo-suffix="1" :font-size-undo="0.6")
-                            |, dB (-40 dB до 0 dB с шагом 5 dB). Запишите полученный уровень
-                            symbol-cmpt(value="P" undo-suffix="2" :font-size-undo="0.6")
-                            |, dB. Определите коэффициент усиления для каждого уровня. Получите и зарисуйте график зависимости уровней сигналов.
-                        li Получите АЧХ (второй график). Попробуйте изменить длину волны оптического излучения в C – диапазоне. Наблюдайте за изменением графика.
-                v-card-title.primary-title.headline Вы должны понимать
-                v-card-text
-                    ul
-                        li Как изменяется коэффициент усиления;
+                        li Как изменяется коэффициент усиления.
                         li Что такое порог и когда он наступает.
-
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light3.png" usemap="#image-map" v-if="!isDark")
@@ -50,10 +66,12 @@
             //img(src="@/assets/chart_input.png" width="800px" )
 
         template(v-if="showOutputSignalChart")
-            v-flex.xs12.chart
-                line-chart(:chart-data="outputSignalChartDataCollection" :height='100' :options="outputSignalChartOptions")
-            v-flex.xs12.chart
-                line-chart(:chart-data="amplitudeArequencyCharacteristicChartDataCollection" :height='100' :options="amplitudeArequencyCharacteristicChartOptions")
+            v-flex.xs12
+                .chart
+                    line-chart(:chart-data="outputSignalChartDataCollection" :height='200' :options="outputSignalChartOptions")
+            v-flex.xs12
+                .chart
+                    line-chart(:chart-data="amplitudeArequencyCharacteristicChartDataCollection" :height='300' :options="amplitudeArequencyCharacteristicChartOptions")
 
 </template>
 
@@ -163,8 +181,14 @@
             }
         }
 
-        mounted() {
+        created() {
             this.fillData();
+
+            // if (app.isDevMode) {
+            //     this.signal.waveLength = 1560;
+            //     this.supportShow = false;
+            //     this.showOutputSignalChart = true;
+            // }
         }
 
         openModal(): void {
@@ -180,17 +204,29 @@
             let points: { x: number, y: number }[] = [];
 
             if (this.signal.waveLength === 1560) {
-                for (let i = 1530; i <= 1560; i += 5) {
+                for (let i = 1520; i <= 1570; i += 5) {
                     points.push({
                         x: i,
                         y: this.signal.getYwaveLength(i)
                     })
                 }
             } else {
-                for (let i = 1530; i <= 1560; i += 5) {
+                for (let i = 1520; i <= 1570; i += 5) {
+                    let y: number;
+
+                    switch (i) {
+                        case 1520:
+                            y = -10;
+                            break;
+                        case 1570:
+                            y = -10;
+                            break;
+                        default:
+                            y = this.getRandomInt(-6, 5);
+                    }
                     points.push({
                         x: i,
-                        y: this.getRandomInt(-6, 5)
+                        y
                     })
                 }
             }
@@ -245,7 +281,7 @@
 
         }
 
-        getRandomInt (min: number, max: number) {
+        getRandomInt(min: number, max: number) {
             return Math.floor(Math.random() * (max - min + 1)) + min
         }
     }
@@ -264,7 +300,7 @@
     }
 
     .chart {
-        max-width: 800px;
+        max-width: 600px;
         margin: 10px auto;
     }
 
