@@ -35,50 +35,55 @@
                         sm12
                     ).answerList
                         ul
-                            template(
-                                v-if="!question.multiply"
+                            li(
+                                v-for="(answer, index) in question.answers"
+                                :class="{'light': !isDark, 'dark': isDark}"
                             )
-                                li(
-                                    v-for="(answer, index) in question.answers"
-                                    :class="{'light': !isDark, 'dark': isDark, 'disabled': isQuestionDisabled}"
-                                    @click="answerQuestion([answer])"
+                                v-layout(
+                                    row
                                 )
-                                    p {{index + 1}}. {{answer.title}}
-                                    v-img(
-                                        v-if="answer.img"
-                                        :src="answer.img"
-                                        :lazy-src="answer.img"
-                                        :height="getAnswerImgSize(answer).height"
-                                        :width="getAnswerImgSize(answer).width"
-                                        style="margin: 0 auto"
-                                        contain
+                                    v-flex(
+                                        sm1
+                                        layout
+                                        align-center
                                     )
-                            template(
-                                v-else
-                            )
-                                li(
-                                    v-for="(answer, index) in question.answers"
-                                    :class="{'light': !isDark, 'dark': isDark}"
-                                )
-                                    v-layout(row)
-                                        v-flex(sm1)
-                                            v-checkbox(
-                                                v-model="answer.selected"
-                                                :disabled="isQuestionDisabled"
+                                        v-checkbox(
+                                            v-if="question.multiply"
+                                            v-model="answer.selected"
+                                            @change="updateAnswers"
+                                            :disabled="isQuestionDisabled"
+                                        )
+
+                                        v-radio-group(
+                                            v-if="!question.multiply"
+                                            v-model="answer.selected"
+                                            @change="updateAnswers(answer)"
+                                            :disabled="isQuestionDisabled"
+                                        )
+                                            v-radio(
+                                                :value="true"
                                             )
-                                        v-flex(sm11 layout align-center)
-                                            p {{index + 1}}. {{answer.title}}
-                                            v-img(
-                                                v-if="answer.img"
-                                                :src="answer.img"
-                                                :lazy-src="answer.img"
-                                                :height="getAnswerImgSize(answer).height"
-                                                :width="getAnswerImgSize(answer).width"
-                                                style="margin: 0 auto"
-                                                contain
+                                            v-radio(
+                                                :value="false"
+                                                v-show="false"
                                             )
+                                    v-flex(
+                                        sm11
+                                        layout
+                                        align-center
+                                    )
+                                        p {{index + 1}}. {{answer.title}}
+                                        v-img(
+                                            v-if="answer.img"
+                                            :src="answer.img"
+                                            :lazy-src="answer.img"
+                                            :height="getAnswerImgSize(answer).height"
+                                            :width="getAnswerImgSize(answer).width"
+                                            style="margin: 0 auto"
+                                            contain
+                                        )
                     v-flex(
-                        v-if="question.multiply"
+                        v-if="!isQuestionDisabled"
                         layout
                         justify-center
                         sm12
@@ -87,7 +92,7 @@
                             color="primary"
                             large
                             @click="answerQuestion(selectedAnswers)"
-                            :disabled="isQuestionDisabled || selectedAnswers.length === 0"
+                            :disabled="selectedAnswers.length === 0"
                         ) Ответить
 
 
@@ -145,13 +150,27 @@
         quiz?: Quiz;
         questionIndexCurrent: number = 1;
         isComplete: boolean = false;
+        selectedAnswers: Answer[] = [];
+        isQuestionDisabled: boolean = false;
 
         created(): void {
             this.quiz = new Quiz(data);
         }
 
         get question(): Question | null {
-            return this.quiz && this.quiz.questions.length > 0 ? this.quiz.questions[this.questionIndexCurrent - 1] : null;
+            const question: Question | null = this.quiz &&
+            this.quiz.questions.length > 0 ? this.quiz.questions[this.questionIndexCurrent - 1] : null;
+
+
+            if (question) {
+                this.selectedAnswers = question.answers.filter(item => item.selected);
+                this.isQuestionDisabled = question.status !== null;
+            } else {
+                this.selectedAnswers = [];
+                this.isQuestionDisabled = false;
+            }
+
+            return question;
         }
 
         @Watch('isComplete')
@@ -167,7 +186,16 @@
             }
         }
 
-        get selectedAnswers(): Answer[] {
+        updateAnswers(answer?: Answer): void {
+            if (this.question && answer && !this.question.multiply) {
+                this.question.clearAnswers();
+                answer.selected = true;
+            }
+
+            this.selectedAnswers = this.getSelectedAnswers();
+        }
+
+        getSelectedAnswers(): Answer[] {
             let value: Answer[] = [];
 
             if (this.question) {
@@ -182,6 +210,8 @@
 
                 if (this.quiz && this.question) {
                     this.question.answer(answers);
+                    this.isQuestionDisabled = true;
+
                     const index: number | null = this.quiz.firstUnAnsweredIndex;
 
                     console.log(this.quiz);
@@ -215,10 +245,6 @@
                 width,
                 height
             }
-        }
-
-        get isQuestionDisabled(): boolean {
-            return this.question ? this.question.status !== null : false;
         }
 
         restart(): void {
@@ -262,10 +288,6 @@
                     &:not(.disabled):hover {
                         filter: brightness(110%);
                     }
-                }
-
-                &:not(.disabled):hover {
-                    cursor: pointer;
                 }
 
                 p {

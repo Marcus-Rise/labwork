@@ -67,6 +67,8 @@ export default class Question {
     }
 
     answer(answers: Answer[]): void {
+        this.clearAnswers();
+
         let status: boolean = true;
 
         for (const answer of answers) {
@@ -74,6 +76,7 @@ export default class Question {
                 const isAnswerExitst: boolean = this._answers.map(item => item.title).indexOf(answer.title) > -1;
 
                 if (isAnswerExitst) {
+                    answers[answers.indexOf(answer)].selected = true;
                     status = answer.isRight;
                 }
             } else {
@@ -82,6 +85,10 @@ export default class Question {
         }
 
         this._status = status;
+    }
+
+    clearAnswers(): void {
+        this._answers.forEach(item => item.selected = false);
     }
 }
 
