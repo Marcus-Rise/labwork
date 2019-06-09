@@ -1,25 +1,38 @@
 <template lang="pug">
     div
-        v-layout.row.wrap(v-if="quiz && !isComplete")
-            v-flex.xs12.pagination
-                .text-xs-center
-                    v-pagination(v-model="questionIndexCurrent" :length="quiz.questions.length")
-            v-flex.xs12(v-if="question")
-                .text-xs-center
-                    h1 Вопрос {{questionIndexCurrent}}. {{question.title}}
-            template(v-if="question")
-                v-flex.xs12(v-if="question.img")
-                    v-container
+        v-container
+            v-layout(
+                v-if="quiz && !isComplete"
+                row
+                wrap
+            )
+                v-flex.xs12.pagination
+                    .text-xs-center
+                        v-pagination(
+                            v-model="questionIndexCurrent"
+                            :length="quiz.questions.length"
+                        )
+                v-flex.xs12(
+                    v-if="question"
+                )
+                    .text-xs-center
+                        h1 Вопрос {{questionIndexCurrent}}. {{question.title}}
+                template(
+                    v-if="question"
+                )
+                    v-flex.xs12(
+                        v-if="question.img"
+                    )
                         v-img.grey.lighten-2(
                             :src="question.img"
                             :lazy-src="question.img"
                             aspect-ratio="1"
                             height="300"
                         )
-                v-flex.xs12
-                    v-container.answerList
+                    v-flex.xs12.answerList
                         ul
-                            li(v-for="(answer, index) in question.answers"
+                            li(
+                                v-for="(answer, index) in question.answers"
                                 :class="{'light': !isDark, 'dark': isDark}"
                                 @click="answerQuestion(answer)"
                             )
@@ -28,25 +41,45 @@
                                     v-if="answer.img"
                                     :src="answer.img"
                                     :lazy-src="answer.img"
-                                    height="250"
-                                    width="auto"
+                                    :height="getAnswerImgSize(answer).height"
+                                    :width="getAnswerImgSize(answer).width"
+                                    style="margin: 0 auto"
                                     contain
                                 )
 
-        v-layout.row.justify-center.wrap(v-if="quiz && isComplete")
-            v-flex.xs12
-                .text-xs-center
-                    h1(v-if="quiz.status") Допуск получен
-                    h1(v-if="!quiz.status") Допуск не получен
-            v-flex.xs12.text-xs-center
-                v-btn(color="info" @click="restart()" v-if="!quiz.status") Пройти тест еще раз
-            v-layout.row.wrap
-                v-flex.sm12.text-xs-center
-                    router-link(:to="{name: 'labwork'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №1
-                v-flex.sm12.text-xs-center
-                    router-link(:to="{name: 'labwork2'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №2
-                v-flex.sm12.text-xs-center
-                    router-link(:to="{name: 'labwork3'}" v-if="quiz.status") Перейти к выполнению лабораторной работы №3
+            v-layout.row.justify-center.wrap(
+                v-if="quiz && isComplete"
+            )
+                v-flex.xs12
+                    .text-xs-center
+                        h1(
+                            v-if="quiz.status"
+                        ) Допуск получен
+                        h1(
+                            v-if="!quiz.status"
+                        ) Допуск не получен
+                v-flex.xs12.text-xs-center
+                    v-btn(
+                        v-if="!quiz.status"
+                        color="info"
+                        @click="restart()"
+                    ) Пройти тест еще раз
+                v-layout.row.wrap
+                    v-flex.sm12.text-xs-center
+                        router-link(
+                            v-if="quiz.status"
+                            :to="{name: 'labwork'}"
+                        ) Перейти к выполнению лабораторной работы №1
+                    v-flex.sm12.text-xs-center
+                        router-link(
+                            v-if="quiz.status"
+                            :to="{name: 'labwork2'}"
+                        ) Перейти к выполнению лабораторной работы №2
+                    v-flex.sm12.text-xs-center
+                        router-link(
+                            v-if="quiz.status"
+                            :to="{name: 'labwork3'}"
+                        ) Перейти к выполнению лабораторной работы №3
 
 </template>
 
@@ -107,6 +140,16 @@
 
                 this.isComplete = this.quiz.isComplite;
                 console.log("isComplete", this.isComplete);
+            }
+        }
+
+        getAnswerImgSize(answer: Answer): { width: number, height: number } {
+            const width: number = answer.imgWidth ? parseInt(answer.imgWidth) : 450;
+            const height: number = answer.imgHeight ? parseInt(answer.imgHeight) : 200;
+
+            return {
+                width,
+                height
             }
         }
 

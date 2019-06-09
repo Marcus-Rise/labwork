@@ -85,6 +85,26 @@
           "true": false
         }
       ]
+    },{
+      "title": "При выполнении какого условия одиночная замкнутая система самовозбудится?",
+      "answers": [
+        {
+          "img": "img/questions/8/1.png",
+          "img_height": "150",
+          "img_width": "200",
+          "true": true
+        },{
+          "img": "img/questions/8/2.png",
+          "img_height": "150",
+          "img_width": "200",
+          "true": false
+        },{
+          "img": "img/questions/8/3.png",
+          "img_height": "150",
+          "img_width": "200",
+          "true": false
+        }
+      ]
     }
   ]
 }
