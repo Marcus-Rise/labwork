@@ -12,16 +12,18 @@
                             v-model="questionIndexCurrent"
                             :length="quiz.questions.length"
                         )
-                v-flex.xs12(
-                    v-if="question"
-                )
-                    .text-xs-center
-                        h1 Вопрос {{questionIndexCurrent}}. {{question.title}}
                 template(
                     v-if="question"
                 )
-                    v-flex.xs12(
+                    v-flex(
+                        sm12
+                    )
+                        .text-xs-center
+                            h1 Вопрос {{questionIndexCurrent}}. {{question.title}}
+
+                    v-flex(
                         v-if="question.img"
+                        sm12
                     )
                         v-img.grey.lighten-2(
                             :src="question.img"
@@ -29,23 +31,65 @@
                             aspect-ratio="1"
                             height="300"
                         )
-                    v-flex.xs12.answerList
+                    v-flex(
+                        sm12
+                    ).answerList
                         ul
-                            li(
-                                v-for="(answer, index) in question.answers"
-                                :class="{'light': !isDark, 'dark': isDark}"
-                                @click="answerQuestion(answer)"
+                            template(
+                                v-if="!question.multiply"
                             )
-                                p {{index + 1}}. {{answer.title}}
-                                v-img(
-                                    v-if="answer.img"
-                                    :src="answer.img"
-                                    :lazy-src="answer.img"
-                                    :height="getAnswerImgSize(answer).height"
-                                    :width="getAnswerImgSize(answer).width"
-                                    style="margin: 0 auto"
-                                    contain
+                                li(
+                                    v-for="(answer, index) in question.answers"
+                                    :class="{'light': !isDark, 'dark': isDark, 'disabled': isQuestionDisabled}"
+                                    @click="answerQuestion([answer])"
                                 )
+                                    p {{index + 1}}. {{answer.title}}
+                                    v-img(
+                                        v-if="answer.img"
+                                        :src="answer.img"
+                                        :lazy-src="answer.img"
+                                        :height="getAnswerImgSize(answer).height"
+                                        :width="getAnswerImgSize(answer).width"
+                                        style="margin: 0 auto"
+                                        contain
+                                    )
+                            template(
+                                v-else
+                            )
+                                li(
+                                    v-for="(answer, index) in question.answers"
+                                    :class="{'light': !isDark, 'dark': isDark}"
+                                )
+                                    v-layout(row)
+                                        v-flex(sm1)
+                                            v-checkbox(
+                                                v-model="answer.selected"
+                                                :disabled="isQuestionDisabled"
+                                            )
+                                        v-flex(sm11 layout align-center)
+                                            p {{index + 1}}. {{answer.title}}
+                                            v-img(
+                                                v-if="answer.img"
+                                                :src="answer.img"
+                                                :lazy-src="answer.img"
+                                                :height="getAnswerImgSize(answer).height"
+                                                :width="getAnswerImgSize(answer).width"
+                                                style="margin: 0 auto"
+                                                contain
+                                            )
+                    v-flex(
+                        v-if="question.multiply"
+                        layout
+                        justify-center
+                        sm12
+                    )
+                        v-btn(
+                            color="primary"
+                            large
+                            @click="answerQuestion(selectedAnswers)"
+                            :disabled="isQuestionDisabled || selectedAnswers.length === 0"
+                        ) Ответить
+
 
             v-layout.row.justify-center.wrap(
                 v-if="quiz && isComplete"
@@ -123,24 +167,44 @@
             }
         }
 
-        answerQuestion(answer: Answer): void {
-            if (this.quiz && this.question) {
-                this.question.answer(answer);
-                const index: number | null = this.quiz.firstUnAnsweredIndex;
+        get selectedAnswers(): Answer[] {
+            let value: Answer[] = [];
 
-                console.log(this.quiz);
-
-                if (!this.quiz.isComplite) {
-                    if (index && this.questionIndexCurrent === this.quiz.questions.length) {
-                        this.questionIndexCurrent = index + 1;
-                    } else {
-                        this.next();
-                    }
-                }
-
-                this.isComplete = this.quiz.isComplite;
-                console.log("isComplete", this.isComplete);
+            if (this.question) {
+                value = this.question.answers.filter(item => item.selected);
             }
+
+            return value;
+        }
+
+        answerQuestion(answers: Answer[]): void {
+            if (!this.isQuestionDisabled) {
+
+                if (this.quiz && this.question) {
+                    this.question.answer(answers);
+                    const index: number | null = this.quiz.firstUnAnsweredIndex;
+
+                    console.log(this.quiz);
+
+                    if (!this.quiz.isComplite) {
+                        if (index && this.questionIndexCurrent === this.quiz.questions.length) {
+                            this.questionIndexCurrent = index + 1;
+                        } else {
+                            this.next();
+                        }
+                    }
+
+                    this.isComplete = this.quiz.isComplite;
+                    const percent: number = this.quiz.questions.filter(item => {
+                        return item.status === true
+                    }).length / this.quiz.questions.length * 100;
+
+                    console.log("%", parseInt(String(percent)));
+
+                    console.log("isComplete", this.isComplete);
+                }
+            }
+
         }
 
         getAnswerImgSize(answer: Answer): { width: number, height: number } {
@@ -151,6 +215,10 @@
                 width,
                 height
             }
+        }
+
+        get isQuestionDisabled(): boolean {
+            return this.question ? this.question.status !== null : false;
         }
 
         restart(): void {
@@ -183,7 +251,7 @@
                 &.light {
                     background-color: #c6c6c6;
 
-                    &:hover {
+                    &:not(.disabled):hover {
                         filter: brightness(105%);
                     }
                 }
@@ -191,12 +259,12 @@
                 &.dark {
                     background-color: #6E6E6E;
 
-                    &:hover {
+                    &:not(.disabled):hover {
                         filter: brightness(110%);
                     }
                 }
 
-                &:hover {
+                &:not(.disabled):hover {
                     cursor: pointer;
                 }
 

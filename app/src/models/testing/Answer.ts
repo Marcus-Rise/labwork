@@ -1,10 +1,19 @@
 export default class Answer {
+    get selected(): boolean {
+        return this._selected;
+    }
+
+    set selected(value: boolean) {
+        this._selected = value;
+    }
     get imgHeight(): string | null {
         return this._imgHeight;
     }
+
     get imgWidth(): string | null {
         return this._imgWidth;
     }
+
     get img(): string | null {
         return this._img;
     }
@@ -22,6 +31,7 @@ export default class Answer {
     private readonly _img: string | null;
     private readonly _imgWidth: string | null;
     private readonly _imgHeight: string | null;
+    private _selected: boolean;
 
     constructor(obj: AnswerApi)
     constructor(title: string, isRight: boolean)
@@ -45,6 +55,8 @@ export default class Answer {
             this._imgWidth = titleOrApiObj.img_width || null;
             this._imgHeight = titleOrApiObj.img_height || null;
         }
+
+        this._selected = false;
     }
 }
 
