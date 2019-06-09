@@ -1,17 +1,21 @@
 <template lang="pug">
     div
+
+
         v-container
             v-layout(
                 v-if="quiz && !isComplete"
                 row
                 wrap
             )
-                v-flex.xs12.pagination
-                    .text-xs-center
-                        v-pagination(
-                            v-model="questionIndexCurrent"
-                            :length="quiz.questions.length"
-                        )
+                testing-unlock-cmpt(
+                    @unlock="unlock"
+                )
+                v-flex.xs12.pagination.text-xs-center
+                    v-pagination(
+                        v-model="questionIndexCurrent"
+                        :length="quiz.questions.length"
+                    )
                 template(
                     v-if="question"
                 )
@@ -156,9 +160,10 @@
     import Question from "@/models/testing/Question";
     import {Getter, Mutation} from "vuex-class";
     import Answer from "@/models/testing/Answer";
+    import TestingUnlockCmpt from "@/components/TestingUnlockCmpt.vue";
 
     @Component({
-        components: {}
+        components: {TestingUnlockCmpt}
     })
     export default class Testing extends Vue {
         @Getter isDark?: boolean;
@@ -169,6 +174,13 @@
         isComplete: boolean = false;
         selectedAnswers: Answer[] = [];
         isQuestionDisabled: boolean = false;
+
+        unlock(): void {
+            if (this.quiz) {
+                this.quiz.unlock();
+                this.isComplete = true;
+            }
+        }
 
         created(): void {
             this.quiz = new Quiz(data);

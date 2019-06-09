@@ -1,6 +1,9 @@
 import Answer, {AnswerApi} from "./Answer";
 
 export default class Question {
+    set status(value: boolean | null) {
+        this._status = value;
+    }
     get multiply(): boolean {
         return this._multiply;
     }
