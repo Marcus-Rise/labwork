@@ -15,6 +15,8 @@ export default class Question {
 
     clear(): void {
         this._status = null;
+
+        this.clearAnswers();
     }
 
     get answers(): Answer[] {
@@ -35,14 +37,14 @@ export default class Question {
     constructor(titleOrApiObj: string | QuestionApi, img?: string, answers?: Answer[], multiply?: boolean) {
         if (typeof titleOrApiObj === "string") {
             this._title = titleOrApiObj;
-            this.addAnswers(answers ? answers : []);
             this._img = img || null;
             this._multiply = multiply !== undefined ? multiply : false;
+            this.addAnswers(answers ? answers : []);
         } else {
             this._title = titleOrApiObj.title;
-            this.addAnswers(titleOrApiObj.answers);
             this._img = titleOrApiObj.img || null;
             this._multiply = titleOrApiObj.multiply || false;
+            this.addAnswers(titleOrApiObj.answers);
         }
     }
 

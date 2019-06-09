@@ -24,12 +24,14 @@
                     v-flex(
                         v-if="question.img"
                         sm12
+                        style="margin-bottom: 15px"
                     )
                         v-img.grey.lighten-2(
                             :src="question.img"
                             :lazy-src="question.img"
                             aspect-ratio="1"
                             height="300"
+                            contain
                         )
                     v-flex(
                         sm12
@@ -68,20 +70,35 @@
                                                 v-show="false"
                                             )
                                     v-flex(
-                                        sm11
+                                        sm1
                                         layout
                                         align-center
                                     )
-                                        p {{index + 1}}. {{answer.title}}
-                                        v-img(
-                                            v-if="answer.img"
-                                            :src="answer.img"
-                                            :lazy-src="answer.img"
-                                            :height="getAnswerImgSize(answer).height"
-                                            :width="getAnswerImgSize(answer).width"
-                                            style="margin: 0 auto"
-                                            contain
+                                        p {{index + 1}}.
+                                    v-flex(
+                                        sm11
+                                        layout
+                                        align-center
+                                        justify-center
+                                        row
+                                    )
+                                        v-flex(
+                                            v-if="answer.title"
+                                            sm
                                         )
+                                            p {{answer.title}}
+                                        v-flex(
+                                            sm6
+                                        )
+                                            v-img.grey.lighten-2(
+                                                v-if="answer.img"
+                                                :src="answer.img"
+                                                :lazy-src="answer.img"
+                                                :height="getAnswerImgSize(answer).height"
+                                                :width="getAnswerImgSize(answer).width"
+                                                style="margin: 0 auto"
+                                                contain
+                                            )
                     v-flex(
                         v-if="!isQuestionDisabled"
                         layout
