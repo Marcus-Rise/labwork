@@ -22,3 +22,5 @@ yarn-error.log*
 *.sw?
 
 packaged*
+/destfolder/
+/package-lock.json
