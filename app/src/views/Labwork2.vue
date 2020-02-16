@@ -221,21 +221,24 @@
         margin-top: 50px;
         position: relative;
 
-        $size: 1336;
+        $size: 1024;
         min-width: #{$size}px;
         max-width: #{$size}px;
+
+        display: flex;
+        justify-content: center;
     }
 
     .optical-router-device, .optical-router-device-duplicate {
-        $size: 50px;
+        $size: 40px;
         width: $size;
         height: $size;
         position: absolute;
     }
 
     .optical-router-device {
-        top: 83px;
-        left: 736px;
+        top: 63px;
+        left: 562px;
     }
 
     .optical-router-device-duplicate {
@@ -244,20 +247,20 @@
     }
 
     .telephone-device-dialog_1, .telephone-device-dialog_2 {
-        $size: 50px;
+        $size: 40px;
         width: $size;
         height: $size;
         position: absolute;
     }
 
     .telephone-device-dialog_1 {
-        top: 80px;
-        left: 10px;
+        top: 61px;
+        left: 7px;
     }
 
     .telephone-device-dialog_2 {
-        top: 79px;
-        left: 1276px;
+        top: 61px;
+        left: 978px;
     }
 
 </style>
