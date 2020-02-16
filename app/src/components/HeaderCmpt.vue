@@ -5,10 +5,11 @@
         )
         v-toolbar-title Оптический дуплексный усилитель
         v-spacer
-        div.d-flex.align-center.justify-center
-            v-icon wb_sunny
-            v-switch.align-center.flex.themeSwitch(:value="isThemeDark" @change="toggleTheme(!isDark)")
-            v-icon brightness_3
+        //-
+            div.d-flex.align-center.justify-center
+                v-icon wb_sunny
+                v-switch.align-center.flex.themeSwitch(:value="isThemeDark" @change="toggleTheme(!isDark)")
+                v-icon brightness_3
         v-spacer
         v-toolbar-items.hidden-sm-and-down
             router-link.navLink.link(:to="{name: 'theory'}" :class="{'light': !isDark, 'dark': isDark}") Теория
