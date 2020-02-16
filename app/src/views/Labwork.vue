@@ -56,26 +56,26 @@
                     b {{generator2.power}}дБ
 
             template(v-if="generatorDots_1")
-                dot-cmpt(:position="{left: 170, top: 163}" :value="generator1.power" :defaultValue="-30")
+                dot-cmpt(:position="{left: 190, top: 135}" :value="generator1.power" :defaultValue="-30" value-style="margin-top: 20px")
                 dot-cmpt(:position="{left: 275, top: 29}" :value="generator1.power" :defaultValue="-30 -5")
                 dot-cmpt(:position="{left: 445, top: 29}" :value="generator1.power" :defaultValue="-30 -5 + 40")
-                dot-cmpt(:position="{left: 540, top: 163}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5")
+                dot-cmpt(:position="{left: 520, top: 135}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5" value-style="margin-top: 20px")
 
-                dot-cmpt(:position="{left: 630, top: 163}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30")
+                dot-cmpt(:position="{left: 645, top: 135}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30"  value-style="margin-top: 20px")
                 dot-cmpt(:position="{left: 720, top: 29}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5")
                 dot-cmpt(:position="{left: 900, top: 29}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40")
-                dot-cmpt(:position="{left: 1090, top: 163}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5 -30")
+                dot-cmpt(:position="{left: 1105, top: 135}" :value="generator1.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5 -30"  value-style="margin-top: 30px")
 
             template(v-if="generatorDots_2")
-                dot-cmpt(:position="{left: 1000, top: 163}" :value="generator2.power" :defaultValue="-30")
+                dot-cmpt(:position="{left: 975, top: 135}" :value="generator2.power" :defaultValue="-30"  value-style="margin-top: 20px")
                 dot-cmpt(:position="{left: 900, top: 240}" :value="generator2.power" :defaultValue="-30 -5")
                 dot-cmpt(:position="{left: 720, top: 240}" :value="generator2.power" :defaultValue="-30 -5 + 40")
-                dot-cmpt(:position="{left: 630, top: 163}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5")
+                dot-cmpt(:position="{left: 645, top: 135}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5"  value-style="margin-top: 20px")
 
-                dot-cmpt(:position="{left: 540, top: 163}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30")
+                dot-cmpt(:position="{left: 520, top: 135}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30"  value-style="margin-top: 20px")
                 dot-cmpt(:position="{left: 440, top: 240}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5")
                 dot-cmpt(:position="{left: 270, top: 240}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40")
-                dot-cmpt(:position="{left: 80, top: 163}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5 -30")
+                dot-cmpt(:position="{left: 63, top: 135}" :value="generator2.power" :defaultValue="-30 -5  + 40 -5 -30 -5 + 40 -5 -30"  value-style="margin-top: 30px")
 
         GeneratorSetupDialogCmpt(
             :show="generatorDialog_1"

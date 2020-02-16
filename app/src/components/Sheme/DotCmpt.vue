@@ -1,8 +1,16 @@
 <template lang="pug">
-    .dot-wrapper(:style="styles" :class="{'dark': isDark, 'light': !isDark, 'hover': hover}")
-        .labelUp(v-if="labelUp") {{labelUp}}
+    .dot-wrapper(
+        :style="styles"
+        :class="{'dark': isDark, 'light': !isDark, 'hover': hover}"
+    )
+        .labelUp(
+            v-if="labelUp"
+        ) {{labelUp}}
         .dot
-        span(v-if="value !== undefined")
+        span(
+            v-if="value !== undefined"
+            :style="valueStyle"
+        )
             b {{defaultValue + value}}{{suffix}}
 </template>
 
@@ -20,6 +28,7 @@
         @Prop({type: Object, required: true}) position?: Position;
         @Prop({type: Boolean, default: false}) hover?: boolean;
         @Prop({type: String}) labelUp?: string;
+        @Prop({type: String}) valueStyle?: string;
 
         get styles(): string {
             return this.position ? `left: ${this.position.left}px; top: ${this.position.top}px` : '';
@@ -28,8 +37,6 @@
 </script>
 
 <style lang="scss" scoped>
-
-
     .dot-wrapper {
         display: flex;
         flex-direction: column;
@@ -42,10 +49,11 @@
             cursor: pointer;
 
             &.light > .dot {
-                box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.5);
+                box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.5);
             }
+
             &.dark > .dot {
-                box-shadow: 0px 0px 5px 5px rgba($color-pink,0.5);
+                box-shadow: 0px 0px 5px 5px rgba($color-pink, 0.5);
             }
         }
 
