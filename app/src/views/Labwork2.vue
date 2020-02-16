@@ -68,16 +68,17 @@
             img(src="@/assets/scheme/light2.png" usemap="#image-map" v-if="!isDark")
             .telephone-device-dialog_1.mapped-element(@click="telephoneDeviceDialog_1 = true")
             .telephone-device-dialog_2.mapped-element(@click="telephoneDeviceDialog_2 = true")
-            template(v-if="telephoneDevice_1.powerOn || telephoneDevice_2.powerOn")
-                v-tooltip(lazy bottom)
-                    .optical-router-device.mapped-element(slot="activator")
-                    span Отключите подачу сигнала
-                v-tooltip(lazy bottom)
-                    .optical-router-device-duplicate.mapped-element(slot="activator")
-                    span Отключите подачу сигнала
-            template(v-else)
-                .optical-router-device.mapped-element(@click="opticalRouterDeviceSetup()")
-                .optical-router-device-duplicate.mapped-element(@click="opticalRouterDeviceSetup()")
+            //-
+                template(v-if="telephoneDevice_1.powerOn || telephoneDevice_2.powerOn")
+                    v-tooltip(lazy bottom)
+                        .optical-router-device.mapped-element(slot="activator")
+                        span Отключите подачу сигнала
+                    v-tooltip(lazy bottom)
+                        .optical-router-device-duplicate.mapped-element(slot="activator")
+                        span Отключите подачу сигнала
+                template(v-else)
+            .optical-router-device.mapped-element(@click="opticalRouterDeviceSetup()")
+            .optical-router-device-duplicate.mapped-element(@click="opticalRouterDeviceSetup()")
 
             TelephoneDeviceDialog(
                 :show="telephoneDeviceDialog_1"
@@ -115,10 +116,11 @@
                 sinusoid-icon(:position="{left: 1055, top: -30}")
 
             template(v-if="telephoneDevice_1.powerOn || opticalRouterDevice.passing <= 35")
-                beam-icon(:position="{left: 695, top: -5}")
+                beam-icon(:position="{left: 504, top: -39}")
+
 
             template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing <= 35")
-                beam-icon(:position="{left: 553, top: 197}" :rotate="180")
+                beam-icon(:position="{left: 434, top: 164}" :rotate="180")
 
             template(v-if="telephoneDevice_2.powerOn")
                 dot-cmpt(:position="{left: 65, top: 100}" :value="-7" suffix="dB")
@@ -179,9 +181,9 @@
         opticalRouterDevice: OpticalRouterDevice = new OpticalRouterDevice();
 
         opticalRouterDeviceSetup(): void {
-            if (!this.telephoneDevice_1.powerOn && !this.telephoneDevice_2.powerOn) {
-                this.opticalRouterDeviceDialog = true;
-            }
+            // if (!this.telephoneDevice_1.powerOn && !this.telephoneDevice_2.powerOn) {
+            this.opticalRouterDeviceDialog = true;
+            // }
         }
 
         opticalRouterDeviceSettuped(): void {
@@ -237,13 +239,13 @@
     }
 
     .optical-router-device {
-        top: 63px;
-        left: 562px;
+        top: 62px;
+        left: 563px;
     }
 
     .optical-router-device-duplicate {
-        top: 83px;
-        left: 562px;
+        top: 62px;
+        left: 430px;
     }
 
     .telephone-device-dialog_1, .telephone-device-dialog_2 {
