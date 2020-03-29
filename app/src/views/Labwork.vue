@@ -1,7 +1,8 @@
 <template lang="pug">
     v-layout.row.wrap.justify-center
-        task-modal-window(v-model="supportShow")
-            pdf-viewer(src="/tasks.pdf" fixed-page="1")
+        v-flex.xs12
+            task-modal-window(v-model="supportShow")
+                pdf-viewer(src="/tasks.pdf" fixed-page="1")
         div.map-container
             img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")
