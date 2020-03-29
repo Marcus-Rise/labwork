@@ -120,26 +120,26 @@
 
 
             template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing <= 35")
-                beam-icon(:position="{left: 434, top: 164}" :rotate="180")
+                beam-icon(:position="{left: 434, top: 200}" :rotate="180")
 
             template(v-if="telephoneDevice_2.powerOn")
-                dot-cmpt(:position="{left: 120, top: 77}" :value="-17" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 180, top: 135}" :value="-26" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 265, top: 135}" :value="-39" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 315, top: 77}" :value="-34.5" suffix="dB" value-style="margin-top: 10px")
-                dot-cmpt(:position="{left: 405, top: 77}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 460, top: 135}" :value="0" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 540, top: 135}" :value="-39" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 590, top: 77}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 683, top: 77}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 730, top: 135}" :value="0" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 815, top: 135}" :value="-13" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 875, top: 76}" :value="-3.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 945, top: 76}" :value="0" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 120, top: 95}" :value="-17" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 180, top: 152}" :value="-26" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 265, top: 152}" :value="-39" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 315, top: 95}" :value="-34.5" suffix="dB" value-style="margin-top: 10px")
+                dot-cmpt(:position="{left: 405, top: 95}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 460, top: 152}" :value="0" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 540, top: 152}" :value="-39" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 590, top: 95}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 683, top: 95}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 730, top: 152}" :value="0" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 815, top: 152}" :value="-13" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 875, top: 95}" :value="-3.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 945, top: 95}" :value="0" suffix="dB" value-style="margin-top: 20px")
 
                 sinusoid-icon(:position="{left: -10, top: 150}")
                 sinusoid-icon(:position="{left: 930, top: 150}")
-                beam-icon(:position="{left: 154, top: 170}" :rotate="180")
+                beam-icon(:position="{left: 154, top: 200}" :rotate="180")
 
 </template>
 
