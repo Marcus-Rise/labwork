@@ -256,13 +256,13 @@
     }
 
     .telephone-device-dialog_1 {
-        top: 61px;
-        left: 7px;
+        top: 78px;
+        left: 6px;
     }
 
     .telephone-device-dialog_2 {
-        top: 61px;
-        left: 978px;
+        top: 78px;
+        left: 977px;
     }
 
 </style>
