@@ -68,15 +68,6 @@
             img(src="@/assets/scheme/light2.png" usemap="#image-map" v-if="!isDark")
             .telephone-device-dialog_1.mapped-element(@click="telephoneDeviceDialog_1 = true")
             .telephone-device-dialog_2.mapped-element(@click="telephoneDeviceDialog_2 = true")
-            //-
-                template(v-if="telephoneDevice_1.powerOn || telephoneDevice_2.powerOn")
-                    v-tooltip(lazy bottom)
-                        .optical-router-device.mapped-element(slot="activator")
-                        span Отключите подачу сигнала
-                    v-tooltip(lazy bottom)
-                        .optical-router-device-duplicate.mapped-element(slot="activator")
-                        span Отключите подачу сигнала
-                template(v-else)
             .optical-router-device.mapped-element(@click="opticalRouterDeviceSetup()")
             .optical-router-device-duplicate.mapped-element(@click="opticalRouterDeviceSetup()")
 
@@ -98,19 +89,20 @@
             )
 
             template(v-if="telephoneDevice_1.powerOn")
-                dot-cmpt(:position="{left: 45, top: 76}" :value="0" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 120, top: 76}" :value="-3.5" suffix="dB"  value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 180, top: 16}" :value="-13" suffix="dB")
-                dot-cmpt(:position="{left: 270, top: 16}" :value="0" suffix="dB")
-                dot-cmpt(:position="{left: 316, top: 77}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 407, top: 77}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 460, top: 16}" :value="-39" suffix="dB" value-style="margin-top: 10px")
-                dot-cmpt(:position="{left: 540, top: 16}" :value="0" suffix="dB" value-style="margin-top: 10px")
-                dot-cmpt(:position="{left: 590, top: 77}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 683, top: 77}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 735, top: 16}" :value="-39" suffix="dB" value-style="margin-top: 10px")
-                dot-cmpt(:position="{left: 815, top: 16}" :value="-26" suffix="dB" value-style="margin-top: 10px")
-                dot-cmpt(:position="{left: 875, top: 76}" :value="-17" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 45, top: 95}" :value="0" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 120, top: 95}" :value="-3.5" suffix="dB"  value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 180, top: 35}" :value="-13" suffix="dB")
+                dot-cmpt(:position="{left: 270, top: 35}" :value="0" suffix="dB")
+                dot-cmpt(:position="{left: 316, top: 95}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 407, top: 95}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 460, top: 35}" :value="-39" suffix="dB" value-style="margin-top: 10px")
+                dot-cmpt(:position="{left: 540, top: 35}" :value="0" suffix="dB" value-style="margin-top: 10px")
+                dot-cmpt(:position="{left: 590, top: 95}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 683, top: 95}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 730, top: 35}" :value="-39" suffix="dB" value-style="margin-top: 10px")
+                dot-cmpt(:position="{left: 820, top: 35}" :value="4.3" suffix="dB" value-style="margin-top: 10px")
+                dot-cmpt(:position="{left: 875, top: 94}" :value="-3.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 946, top: 94}" :value="-7" suffix="dB" value-style="margin-top: 20px")
                 beam-icon(:position="{left: 230, top: -40}")
                 sinusoid-icon(:position="{left: -10, top: 0}")
                 sinusoid-icon(:position="{left: 930, top: 0}")
@@ -120,26 +112,27 @@
 
 
             template(v-if="telephoneDevice_2.powerOn || opticalRouterDevice.passing <= 35")
-                beam-icon(:position="{left: 434, top: 164}" :rotate="180")
+                beam-icon(:position="{left: 434, top: 200}" :rotate="180")
 
             template(v-if="telephoneDevice_2.powerOn")
-                dot-cmpt(:position="{left: 120, top: 77}" :value="-17" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 180, top: 135}" :value="-26" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 265, top: 135}" :value="-39" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 315, top: 77}" :value="-34.5" suffix="dB" value-style="margin-top: 10px")
-                dot-cmpt(:position="{left: 405, top: 77}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 460, top: 135}" :value="0" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 540, top: 135}" :value="-39" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 590, top: 77}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 683, top: 77}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 730, top: 135}" :value="0" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 815, top: 135}" :value="-13" suffix="dB" value-style="margin-top: 15px")
-                dot-cmpt(:position="{left: 875, top: 76}" :value="-3.5" suffix="dB" value-style="margin-top: 20px")
-                dot-cmpt(:position="{left: 945, top: 76}" :value="0" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 45, top: 95}" :value="-7" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 120, top: 95}" :value="-3.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 180, top: 152}" :value="4.3" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 270, top: 152}" :value="-39" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 320, top: 95}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 405, top: 95}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 460, top: 152}" :value="0" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 540, top: 152}" :value="-39" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 590, top: 95}" :value="-34.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 683, top: 95}" :value="-4.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 730, top: 152}" :value="0" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 820, top: 152}" :value="-13" suffix="dB" value-style="margin-top: 15px")
+                dot-cmpt(:position="{left: 875, top: 95}" :value="-3.5" suffix="dB" value-style="margin-top: 20px")
+                dot-cmpt(:position="{left: 945, top: 95}" :value="0" suffix="dB" value-style="margin-top: 20px")
 
                 sinusoid-icon(:position="{left: -10, top: 150}")
                 sinusoid-icon(:position="{left: 930, top: 150}")
-                beam-icon(:position="{left: 154, top: 170}" :rotate="180")
+                beam-icon(:position="{left: 154, top: 200}" :rotate="180")
 
 </template>
 
@@ -172,7 +165,7 @@
     export default class Labwork2 extends Vue {
         @Getter isDark?: boolean;
 
-        supportShow: boolean = true;//!app.isDevMode;
+        supportShow: boolean = true;
         telephoneDeviceDialog_1: boolean = false;
         telephoneDeviceDialog_2: boolean = false;
         opticalRouterDeviceDialog: boolean = false;
@@ -181,9 +174,7 @@
         opticalRouterDevice: OpticalRouterDevice = new OpticalRouterDevice();
 
         opticalRouterDeviceSetup(): void {
-            // if (!this.telephoneDevice_1.powerOn && !this.telephoneDevice_2.powerOn) {
             this.opticalRouterDeviceDialog = true;
-            // }
         }
 
         opticalRouterDeviceSettuped(): void {
@@ -205,18 +196,10 @@
                 this.telephoneDevice_1.powerOn = false;
             }
         }
-
-        created() {
-            // if (app.isDevMode) {
-            //     this.telephoneDevice_2.powerOn = true;
-            //     this.supportShow = false;
-            // }
-        }
     }
 </script>
 
 <style lang="scss" scoped>
-
     .schemeContainer {
         margin-left: auto;
         margin-right: auto;
@@ -239,12 +222,12 @@
     }
 
     .optical-router-device {
-        top: 62px;
+        top: 80px;
         left: 563px;
     }
 
     .optical-router-device-duplicate {
-        top: 62px;
+        top: 80px;
         left: 430px;
     }
 
@@ -256,14 +239,13 @@
     }
 
     .telephone-device-dialog_1 {
-        top: 61px;
-        left: 7px;
+        top: 78px;
+        left: 6px;
     }
 
     .telephone-device-dialog_2 {
-        top: 61px;
-        left: 978px;
+        top: 78px;
+        left: 977px;
     }
-
 </style>
 
