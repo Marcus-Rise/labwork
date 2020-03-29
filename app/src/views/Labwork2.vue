@@ -229,12 +229,12 @@
     }
 
     .optical-router-device {
-        top: 62px;
+        top: 80px;
         left: 563px;
     }
 
     .optical-router-device-duplicate {
-        top: 62px;
+        top: 80px;
         left: 430px;
     }
 
