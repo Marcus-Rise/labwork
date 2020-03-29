@@ -254,6 +254,5 @@
         top: 78px;
         left: 977px;
     }
-
 </style>
 
