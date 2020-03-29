@@ -181,9 +181,7 @@
         opticalRouterDevice: OpticalRouterDevice = new OpticalRouterDevice();
 
         opticalRouterDeviceSetup(): void {
-            // if (!this.telephoneDevice_1.powerOn && !this.telephoneDevice_2.powerOn) {
             this.opticalRouterDeviceDialog = true;
-            // }
         }
 
         opticalRouterDeviceSettuped(): void {
@@ -205,18 +203,10 @@
                 this.telephoneDevice_1.powerOn = false;
             }
         }
-
-        created() {
-            // if (app.isDevMode) {
-            //     this.telephoneDevice_2.powerOn = true;
-            //     this.supportShow = false;
-            // }
-        }
     }
 </script>
 
 <style lang="scss" scoped>
-
     .schemeContainer {
         margin-left: auto;
         margin-right: auto;
