@@ -2,7 +2,7 @@
     v-layout(row wrap)
         v-flex.xs12
             task-modal-window(v-model="supportShow")
-                pdf-viewer(fixed-page="3")
+                pdf-viewer
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light3.png" usemap="#image-map" v-if="!isDark")

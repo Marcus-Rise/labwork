@@ -2,7 +2,7 @@
     v-layout.row.wrap
         v-flex.xs12
             task-modal-window(v-model="supportShow")
-                pdf-viewer(fixed-page="2")
+                pdf-viewer
 
 
         v-flex.xs12.schemeContainer
