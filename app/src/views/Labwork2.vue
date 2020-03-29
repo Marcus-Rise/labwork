@@ -165,7 +165,7 @@
     export default class Labwork2 extends Vue {
         @Getter isDark?: boolean;
 
-        supportShow: boolean = true;//!app.isDevMode;
+        supportShow: boolean = true;
         telephoneDeviceDialog_1: boolean = false;
         telephoneDeviceDialog_2: boolean = false;
         opticalRouterDeviceDialog: boolean = false;
