@@ -14,7 +14,7 @@
                 persistent-hint                )
             v-icon(large @click="next") chevron_right
         v-flex(sm12)
-            pdf(src="theory.pdf" :resize="true" :scale="0.5" :page="parseInt(page)" @numpages="getPdf")
+            pdf(:src="src" :resize="true" :scale="0.5" :page="parseInt(page)" @numpages="getPdf")
         v-flex.actions(
             v-if="!fixedPage"
             sm12 layout row justify-space-between align-center
@@ -43,6 +43,7 @@
     })
     export default class Theory extends Vue {
         @Prop() public readonly fixedPage?: number;
+        @Prop() public readonly src!: string;
 
         page: number = 1;
         totalPages: number = 0;
