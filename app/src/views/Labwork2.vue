@@ -68,15 +68,6 @@
             img(src="@/assets/scheme/light2.png" usemap="#image-map" v-if="!isDark")
             .telephone-device-dialog_1.mapped-element(@click="telephoneDeviceDialog_1 = true")
             .telephone-device-dialog_2.mapped-element(@click="telephoneDeviceDialog_2 = true")
-            //-
-                template(v-if="telephoneDevice_1.powerOn || telephoneDevice_2.powerOn")
-                    v-tooltip(lazy bottom)
-                        .optical-router-device.mapped-element(slot="activator")
-                        span Отключите подачу сигнала
-                    v-tooltip(lazy bottom)
-                        .optical-router-device-duplicate.mapped-element(slot="activator")
-                        span Отключите подачу сигнала
-                template(v-else)
             .optical-router-device.mapped-element(@click="opticalRouterDeviceSetup()")
             .optical-router-device-duplicate.mapped-element(@click="opticalRouterDeviceSetup()")
 
