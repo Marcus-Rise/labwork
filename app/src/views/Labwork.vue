@@ -1,50 +1,7 @@
 <template lang="pug">
     v-layout.row.wrap.justify-center
-        v-flex.xs12
-            task-modal-window(v-model="supportShow")
-                v-card-title.primary-title.headline Однополосная одноволоконная однокабельная ВОСП
-                v-card-title.primary-title.headline Функциональные элементы:
-                v-card-text
-                    ul
-                        li Г – генератор оптического излучения;
-                        li ОРУ – оптическое развязывающее устройство;
-                        li ⊳ – оптический усилитель.
-                v-card-title.primary-title.headline Цель:
-                v-card-text.
-                    Рассмотреть принцип построения однополосной одноволоконной однокабельной ВОСП;
-                    изучить изменение уровня мощности оптического излучения при прохождении через оптический линейный тракт.
-                v-card-title.primary-title.headline Макет:
-                v-card-text.
-                    оптический линейный тракт включает в себя оптический передатчик (генератор оптического излучения), оптическое волокно (ОВ),
-                    два оптических дуплексных усилителя (ОДУ). ОДУ состоит из оптического развязывающего устройства (ОРУ) и двустороннего усилителя.
-                v-card-title.primary-title.headline Задачи
-                v-card-text
-                    ol
-                        li
-                            | Построение диаграммы уровней ОЛТ. Для этого на генераторе установите значение входного уровня сигнала&nbsp;
-                            symbol-cmpt(
-                                undoSuffix="вх"
-                                :fontSizeUndo="0.6"
-                            ) P
-                            | , дБ и длину волны оптического излучения λ , нм
-                        li.
-                            Зарисовать схему. Записать показания затухания сигнала в контрольных точках.
-                        li.
-                            По результатам построить диаграмму уровней.
-                v-card-title.primary-title.headline Рассчитать (запишите полученные результаты, они пригодятся при расчетах):
-                v-card-text
-                    ol
-                        li
-                            | Затухание ОРУ в направлении пропускания,&nbsp;
-                            symbol-cmpt(undo-suffix="ОРУ" :font-size="1.5") α
-                            | , dB.
-                        li Усиления усилителя, S , dB .
-                        li
-                            | Затухание линии,&nbsp;
-                            symbol-cmpt(undo-suffix="ЛС" :font-size="1.5") α
-                            | , dB
-                v-card-title.primary-title.headline Вы должны понимать
-                v-card-text Как изменяется мощность сигнала при прохождении через линию.
+        task-modal-window(v-model="supportShow")
+            pdf-viewer(fixed-page="1")
         div.map-container
             img(src="@/assets/scheme/dark.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light.png" usemap="#image-map" v-if="!isDark")
@@ -99,9 +56,11 @@
     import {app} from "@/services/AppService";
     import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
     import SymbolCmpt from "@/components/SymbolCmpt.vue";
+    import PdfViewer from "@/components/PdfViewer.vue";
 
     @Component({
         components: {
+            PdfViewer,
             SymbolCmpt,
             DotCmpt,
             GeneratorSetupDialogCmpt,

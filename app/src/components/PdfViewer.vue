@@ -1,35 +1,34 @@
 <template lang="pug">
-    v-container
-        v-layout(row wrap justify-center)
-            v-flex.actions(
-                v-if="!fixedPage"
-                sm12 layout row justify-space-between align-center
+    v-layout(row wrap justify-center)
+        v-flex.actions(
+            v-if="!fixedPage"
+            sm12 layout row justify-space-between align-center
+        )
+            v-icon(large @click="prev") chevron_left
+            v-text-field.input(
+                v-model="page"
+                type="number"
+                :min="1"
+                :max="totalPages"
+                :hint="actionsTitle"
+                persistent-hint                )
+            v-icon(large @click="next") chevron_right
+        v-flex(sm12)
+            pdf(src="theory.pdf" :resize="true" :scale="0.5" :page="parseInt(page)" @numpages="getPdf")
+        v-flex.actions(
+            v-if="!fixedPage"
+            sm12 layout row justify-space-between align-center
+        )
+            v-icon(large @click="prev") chevron_left
+            v-text-field.input(
+                v-model="page"
+                type="number"
+                :min="1"
+                :max="totalPages"
+                :hint="actionsTitle"
+                persistent-hint
             )
-                v-icon(large @click="prev") chevron_left
-                v-text-field.input(
-                    v-model="page"
-                    type="number"
-                    :min="1"
-                    :max="totalPages"
-                    :hint="actionsTitle"
-                    persistent-hint                )
-                v-icon(large @click="next") chevron_right
-            v-flex(sm12)
-                pdf(src="theory.pdf" :resize="true" :scale="0.5" :page="parseInt(page)" @numpages="getPdf")
-            v-flex.actions(
-                v-if="!fixedPage"
-                sm12 layout row justify-space-between align-center
-            )
-                v-icon(large @click="prev") chevron_left
-                v-text-field.input(
-                    v-model="page"
-                    type="number"
-                    :min="1"
-                    :max="totalPages"
-                    :hint="actionsTitle"
-                    persistent-hint
-                )
-                v-icon(large @click="next") chevron_right
+            v-icon(large @click="next") chevron_right
 </template>
 
 <script lang="ts">
@@ -55,6 +54,7 @@
         created() {
             if (this.fixedPage) {
                 this.page = this.fixedPage;
+                this.totalPages = 1;
             }
         }
 

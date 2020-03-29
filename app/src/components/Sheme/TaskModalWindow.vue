@@ -10,7 +10,7 @@
                 slot="activator"
             ) help_outline
             span Справка
-        v-dialog(v-model="show" width="500" persistent)
+        v-dialog(v-model="show" :width="width" persistent)
             v-card
                 slot
                 v-card-actions
@@ -24,6 +24,7 @@
     @Component
     export default class TaskModalWindow extends Vue {
         @Prop({type: Boolean, default: false}) value?: boolean;
+        @Prop({default: 800}) width!: string | number;
 
         show: boolean = false;
 

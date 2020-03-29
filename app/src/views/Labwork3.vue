@@ -2,47 +2,7 @@
     v-layout(row wrap)
         v-flex.xs12
             task-modal-window(v-model="supportShow")
-                v-card-title.primary-title.headline Оптический дуплексный усилитель
-                v-card-title.primary-title.headline Цель:
-                v-card-text.
-                    Исследовать оптический
-                    параметры,
-                    получить
-                    усилитель,
-                    амплитудную
-                    и
-                    изучить
-                    основные
-                    амплитудно-частотную
-                    характеристику.
-                v-card-title.primary-title.headline Макет:
-                v-card-text
-                    | Оптический усилитель на оптическом волокне, легированном
-                    | эрбием (EDFA).&nbsp;
-                    symbol-cmpt(undoSuffix="1") P
-                    | , dB и
-                    symbol-cmpt(undoSuffix="2") P
-                    | , dB входной и выходной уровень мощности
-                    | сигнала соответственно.
-                v-card-title.primary-title.headline Задачи:
-                v-card-text
-                    ul
-                        li
-                            | Получите амплитудно-частотную и амплитудную характеристику.
-                            | Для этого изменяйте длину волны оптического излучения в C –
-                            | диапазоне и уровень мощности входного сигнала&nbsp;
-                            symbol-cmpt(undoSuffix="1") P
-                            |, dB (-40 dB до 0 dB с шагом 5 dB). Запишите полученный уровень
-                            symbol-cmpt(undoSuffix="2") P
-                            |, dB. Результаты оформите в таблицу.
-                        li Определите усиление усилителя для каждого уровня.
-                        li Получите и зарисуйте графики.
-                        li Определите порог усиления.
-                v-card-title.primary-title.headline Вы должны понимать:
-                v-card-text
-                    ol
-                        li Как изменяется коэффициент усиления.
-                        li Что такое порог и когда он наступает.
+                pdf-viewer(fixed-page="3")
         v-flex.xs12.schemeContainer()
             img(src="@/assets/scheme/dark3.png" usemap="#image-map" v-if="isDark")
             img(src="@/assets/scheme/light3.png" usemap="#image-map" v-if="!isDark")
@@ -87,9 +47,11 @@
     import {ChartData, ChartOptions} from "chart.js";
     import TaskModalWindow from "@/components/Sheme/TaskModalWindow.vue";
     import SymbolCmpt from "@/components/SymbolCmpt.vue";
+    import PdfViewer from "@/components/PdfViewer.vue";
 
     @Component({
         components: {
+            PdfViewer,
             SymbolCmpt,
             TaskModalWindow,
             LineChart,
