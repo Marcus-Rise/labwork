@@ -12,7 +12,7 @@ function createWindow() {
       nodeIntegration: true
     },
     show: false,
-    icon: path.join(__dirname, 'favicon/apple-touch-icon.png')
+    icon: path.join(__dirname, 'favicon/apple-touch-icon.png'),
   });
 
   mainWindow.once('ready-to-show', () => {
@@ -35,9 +35,12 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  mainWindow.setMenu(null);
 }
 
 app.allowRendererProcessReuse = false;
+app.applicationMenu = null;
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
