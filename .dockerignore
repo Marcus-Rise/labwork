@@ -1,0 +1,13 @@
+.dockerignore
+.DS_Store
+.git
+.gitattributes
+.gitignore
+.gitmodules
+Dockerfile*
+Thumbs.db
+dist
+node_modules
+.idea
+build.sh
+out

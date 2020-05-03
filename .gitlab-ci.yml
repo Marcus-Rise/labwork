@@ -1,0 +1,28 @@
+stages:
+  - build
+  - release
+
+services:
+  - docker:dind
+
+before_script:
+  - export DOCKER_BUILDKIT=1
+
+build:
+  image: docker
+  stage: build
+  script:
+    - docker image build --target build .
+
+release:
+  image: docker
+  stage: release
+  dependencies:
+    - build
+  only:
+    - master
+  script:
+    - docker image build -o out .
+  artifacts:
+    paths:
+      - out
