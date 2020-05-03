@@ -16,7 +16,7 @@
     "package-dev": "set NODE_ENV=development && tsc  index.ts --outDir ./dist --module commonjs && electron ./dist/index.js",
     "package": "set NODE_ENV=production && tsc  index.ts --outDir ./dist --module commonjs && electron-packager --platform=linux,win32,darwin --arch=x64 ./dist --overwrite --out=desktop",
     "create-installer-debian": "electron-installer-debian --src desktop/net-labwork-linux-x64 --arch=x64 --dest desktop/",
-    "create-installer-win": "electron-installer-windows --src desktop/net-labwork-linux-x64 --arch=x64 --dest desktop/"
+    "create-installer-win": "electron-installer-windows --src desktop/net-labwork-win32-x64 --arch=x64 --dest desktop/"
   },
   "dependencies": {
     "chart.js": "^2.8.0",
