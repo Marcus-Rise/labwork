@@ -1,5 +1,9 @@
 FROM node:12 AS base
 
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
+    && apt-get install wine wine32 -y
+
 WORKDIR /app
 
 FROM base AS node_modules
@@ -21,6 +25,7 @@ RUN mkdir static \
     && cp package.json dist
 
 RUN npm run package-linux
+RUN npm run package-win
 
 RUN rm -rf desktop \
     && mkdir desktop \
