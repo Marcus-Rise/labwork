@@ -1,5 +1,11 @@
 {
   "name": "net-labwork",
+  "description": "labwork",
+  "author": {
+    "email": "ilykonst95@gmail.com",
+    "name": "Ilya Konstantinov",
+    "url": "https://marcus-rise.dev"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +14,9 @@
     "build-modern": "vue-cli-service build --modern",
     "test:unit": "vue-cli-service test:unit",
     "package-dev": "set NODE_ENV=development && tsc  index.ts --outDir ./dist --module commonjs && electron ./dist/index.js",
-    "package": "set NODE_ENV=production && tsc  index.ts --outDir ./dist --module commonjs && electron-packager ./dist --platform=linux,win32,darwin --arch=x64 --overwrite --asar --out=desktop"
+    "package": "set NODE_ENV=production && tsc  index.ts --outDir ./dist --module commonjs && electron-packager --platform=linux,win32,darwin --arch=x64 ./dist --overwrite --out=desktop",
+    "create-installer-debian": "electron-installer-debian --src desktop/net-labwork-linux-x64 --arch=x64 --dest desktop/",
+    "create-installer-win": "electron-installer-windows --src desktop/net-labwork-linux-x64 --arch=x64 --dest desktop/"
   },
   "dependencies": {
     "chart.js": "^2.8.0",
@@ -37,6 +45,8 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "electron": "^8.2.5",
+    "electron-installer-debian": "^3.0.0",
+    "electron-installer-windows": "^3.0.0",
     "electron-packager": "^14.2.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pug": "^2.0.3",
