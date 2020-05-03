@@ -11,6 +11,7 @@ before_script:
 build:
   image: docker
   stage: build
+  only: [merge_requests]
   script:
     - docker image build --target build .
 
