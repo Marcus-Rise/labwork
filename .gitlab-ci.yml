@@ -2,6 +2,9 @@ stages:
   - build
   - release
 
+services:
+  - docker:dind
+
 before_script:
   - export DOCKER_BUILDKIT=1
 
