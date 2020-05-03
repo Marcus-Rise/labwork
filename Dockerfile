@@ -29,6 +29,8 @@ FROM build AS package
 
 RUN cp package.json dist \
     && npm run package
+RUN npm run create-installer-debian
+RUN npm run create-installer-win
 
 FROM scratch AS artifacts
 
