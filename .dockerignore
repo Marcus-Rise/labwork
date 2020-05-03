@@ -9,3 +9,5 @@ Thumbs.db
 dist
 node_modules
 .idea
+build.sh
+out
