@@ -1,8 +1,15 @@
 FROM node:12 AS base
 
 RUN dpkg --add-architecture i386 \
+    && echo "deb http://download.mono-project.com/repo/debian beta main" | tee /etc/apt/sources.list.d/mono-xamarin-beta.list \
     && apt-get update \
-    && apt-get install wine wine32 -y
+    && apt-get install \
+        mono-xsp4 \
+        wine \
+        wine32 \
+        wine64 \
+        fakeroot \
+        -y --allow-unauthenticated
 
 WORKDIR /app
 
