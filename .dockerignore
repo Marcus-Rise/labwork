@@ -11,3 +11,5 @@ node_modules
 .idea
 build.sh
 out
+.gitlab-ci.yml
+desktop

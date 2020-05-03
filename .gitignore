@@ -21,6 +21,5 @@ yarn-error.log*
 *.sln
 *.sw?
 
-packaged*
-/destfolder/
+desktop
 out
