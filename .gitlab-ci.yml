@@ -19,7 +19,7 @@ release:
   only:
     - master
   script:
-    - docker image build --target artifacts .
+    - docker image build -o out .
   artifacts:
     paths:
       - out
