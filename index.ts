@@ -26,7 +26,7 @@ function createWindow() {
   // mainWindow.loadFile('./index.html');
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -36,6 +36,8 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+app.allowRendererProcessReuse = false;
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
