@@ -20,18 +20,10 @@ RUN npm run build-modern
 
 FROM build AS package
 
-RUN mkdir static \
-    && cp -r dist/* static \
-    && cp package.json dist
-
-RUN npm run package-linux
-RUN npm run package-win
-
-RUN rm -rf desktop \
-    && mkdir desktop \
-    && cp -r packaged-* desktop
+RUN cp package.json dist \
+    && npm run package
 
 FROM scratch AS artifacts
 
-COPY --from=build /app/dist /web-app
+COPY --from=build /app/dist /dist
 COPY --from=package /app/desktop /
