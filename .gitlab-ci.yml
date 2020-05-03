@@ -2,12 +2,6 @@ stages:
   - build
   - release
 
-variables:
-  IMAGE_TAG_STAGED: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}
-  IMAGE_TAG_TEST: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
-  IMAGE_TAG_RELEASE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}
-  IMAGE_TAG_LATEST: ${CI_REGISTRY_IMAGE}
-
 before_script:
   - export DOCKER_BUILDKIT=1
 
@@ -15,7 +9,7 @@ build:
   image: docker
   stage: build
   script:
-    - docker image build --target build
+    - docker image build --target build .
 
 release:
   image: docker
@@ -25,7 +19,7 @@ release:
   only:
     - master
   script:
-    - docker image build --target artifacts
+    - docker image build --target artifacts .
   artifacts:
     paths:
       - out
