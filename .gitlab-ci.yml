@@ -26,4 +26,4 @@ release:
     - docker image build -o out .
   artifacts:
     paths:
-      - out
+      - out/*
