@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@types/chart.js": "^2.7.52",
-    "@types/electron": "^1.6.10",
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-plugin-pwa": "^3.6.0",
