@@ -1,6 +1,6 @@
 <template lang="pug">
     v-container.max-width
-        pdf-viewer(src="/theory.pdf")
+        pdf-viewer(src="theory.pdf")
 </template>
 
 <script lang="ts">
