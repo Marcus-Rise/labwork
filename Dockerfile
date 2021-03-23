@@ -36,6 +36,8 @@ RUN cp package.json dist \
     && npm run package
 RUN npm run create-installer-debian
 RUN npm run create-installer-win
+RUN zip -r "dist.zip" dist
+RUN for i in */desktop; do zip -r "${i%/}.zip" "$i"; done
 
 FROM scratch AS artifacts
 

@@ -58,29 +58,29 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: web
-          path: artifacts/dist
+          path: artifacts/dist.zip
 
       - name: Upload linux app
         uses: actions/upload-artifact@v2
         with:
           name: linux
           path: |
-            artifacts/linux-setup
-            artifacts/net-labwork-linux-x64
+            artifacts/linux-setup.zip
+            artifacts/net-labwork-linux-x64.zip
 
       - name: Upload windows app
         uses: actions/upload-artifact@v2
         with:
           name: windows
           path: |
-            artifacts/win-setup
-            artifacts/net-labwork-win32-x64
+            artifacts/win-setup.zip
+            artifacts/net-labwork-win32-x64.zip
 
       - name: Upload mac os app
         uses: actions/upload-artifact@v2
         with:
           name: mac_os
-          path: artifacts/net-labwork-darwin-x64
+          path: artifacts/net-labwork-darwin-x64.zip
 
       - name: Login
         env:
