@@ -19,6 +19,11 @@ jobs:
 
       - name: Docker Layer Caching
         uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+        with:
+          key: ${{ github.workflow }}-${{ env.MONTH }}-{hash}
+          restore-keys: |
+            ${{ github.workflow }}-${{ env.MONTH }}-
 
       - name: Install
         run: docker build --target node_modules --cache-from labwork .
