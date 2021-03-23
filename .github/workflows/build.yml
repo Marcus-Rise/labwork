@@ -26,9 +26,11 @@ jobs:
       - name: Build desktop app
         run: docker build --target package .
 
-      - name: Upload
+      - name: Get artifacts
+        run: docker build --target artifacts -o artifacts .
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
           path: artifacts
-        run: docker build --target artifacts -o artifacts .
