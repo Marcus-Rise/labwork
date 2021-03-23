@@ -29,6 +29,17 @@ jobs:
           IMAGE_NAME="docker.pkg.github.com/${IMAGE_REPOSITORY}/${{ env.PACKAGE_NAME }}:${{ env.IMAGE_TAG }}"
           echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
+      - name: Login
+        env:
+          USER_NAME: ${{ github.actor }}
+          USER_PASSWORD: ${{ github.token }}
+        run: |
+          echo $USER_PASSWORD | docker login https://docker.pkg.github.com -u $USER_NAME --password-stdin
+
+      - name: Push cache
+        run: |
+          docker pull ${{ env.IMAGE_NAME }}
+
       - name: Install
         run: docker build --target node_modules --cache-from ${{ env.IMAGE_NAME }} .
 
