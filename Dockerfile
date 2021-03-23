@@ -4,6 +4,7 @@ RUN dpkg --add-architecture i386 \
     && echo "deb http://download.mono-project.com/repo/debian beta main" | tee /etc/apt/sources.list.d/mono-xamarin-beta.list \
     && apt-get update \
     && apt-get install \
+        zip \
         mono-xsp4 \
         wine \
         wine32 \
