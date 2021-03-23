@@ -49,7 +49,7 @@
     "electron-installer-windows": "^3.0.0",
     "electron-packager": "^14.2.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
