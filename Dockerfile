@@ -21,7 +21,12 @@ RUN npm ci
 
 FROM node_modules AS build
 
-COPY ./ .
+COPY ./public ./public
+COPY ./src ./src
+COPY ./tests ./tests
+COPY ./.browserslistrc ./
+COPY ./*.js* ./
+COPY ./*.ts ./
 
 RUN npm run build-modern
 

@@ -21,16 +21,16 @@ jobs:
         uses: satackey/action-docker-layer-caching@v0.0.11
 
       - name: Install
-        run: docker build --target node_modules --build-arg BUILDKIT_INLINE_CACHE=1 .
+        run: docker build --target node_modules --cache-from labwork .
 
       - name: Build web app
-        run: docker build --target build --build-arg BUILDKIT_INLINE_CACHE=1 .
+        run: docker build --target build --cache-from labwork .
 
       - name: Build desktop app
-        run: docker build --target package --build-arg BUILDKIT_INLINE_CACHE=1 .
+        run: docker build --target package --cache-from labwork .
 
       - name: Get artifacts
-        run: docker build --target artifacts -o artifacts --build-arg BUILDKIT_INLINE_CACHE=1 .
+        run: docker build --target artifacts --build-arg BUILDKIT_INLINE_CACHE=1 -t labwork -o artifacts .
 
       - name: LS artifacts
         run: ls artifacts
