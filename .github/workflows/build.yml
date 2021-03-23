@@ -1,6 +1,10 @@
 name: Build
 
 on:
+  release:
+    types:
+      - created
+
   push:
     branches: [ master ]
   pull_request:
