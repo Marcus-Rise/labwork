@@ -12,6 +12,8 @@ on:
 
 env:
   DOCKER_BUILDKIT: 1
+  IMAGE_TAG: "latest"
+  PACKAGE_NAME: 'labwork'
 
 jobs:
   build:
@@ -21,25 +23,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Docker Layer Caching
-        uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-        with:
-          key: ${{ github.workflow }}-${{ env.MONTH }}-{hash}
-          restore-keys: |
-            ${{ github.workflow }}-${{ env.MONTH }}-
+      - name: Setup env
+        run: |
+          IMAGE_REPOSITORY=$(echo ${{ github.repository }} | tr [:upper:] [:lower:])
+          IMAGE_NAME="docker.pkg.github.com/${IMAGE_REPOSITORY}/${{ env.PACKAGE_NAME }}:${{ env.IMAGE_TAG }}"
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
       - name: Install
-        run: docker build --target node_modules --cache-from labwork .
+        run: docker build --target node_modules --cache-from ${{ env.IMAGE_NAME }} .
 
       - name: Build web app
-        run: docker build --target build --cache-from labwork .
+        run: docker build --target build --cache-from ${{ env.IMAGE_NAME }} .
 
       - name: Build desktop app
-        run: docker build --target package --cache-from labwork .
+        run: docker build --target package --cache-from ${{ env.IMAGE_NAME }} .
 
       - name: Get artifacts
-        run: docker build --target artifacts --build-arg BUILDKIT_INLINE_CACHE=1 -t labwork -o artifacts .
+        run: docker build --target artifacts --build-arg BUILDKIT_INLINE_CACHE=1 -t ${{ env.IMAGE_NAME }} -o artifacts .
 
       - name: LS artifacts
         run: ls artifacts
@@ -71,3 +71,14 @@ jobs:
         with:
           name: mac_os
           path: artifacts/net-labwork-darwin-x64
+
+      - name: Login
+        env:
+          USER_NAME: ${{ github.actor }}
+          USER_PASSWORD: ${{ github.token }}
+        run: |
+          echo $USER_PASSWORD | docker login https://docker.pkg.github.com -u $USER_NAME --password-stdin
+
+      - name: Push
+        run: |
+          docker push ${{ env.IMAGE_NAME }}
