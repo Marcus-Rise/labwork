@@ -38,8 +38,11 @@ jobs:
       - name: Build desktop app
         run: docker build --target package --cache-from ${{ env.IMAGE_NAME }} .
 
+      - name: Collect artifacts
+        run: docker build --target artifacts --cache-from ${{ env.IMAGE_NAME }} --build-arg BUILDKIT_INLINE_CACHE=1 -t ${{ env.IMAGE_NAME }} .
+
       - name: Get artifacts
-        run: docker build --target artifacts --build-arg BUILDKIT_INLINE_CACHE=1 -t ${{ env.IMAGE_NAME }} -o artifacts .
+        run: docker build --target artifacts --cache-from ${{ env.IMAGE_NAME }} -o artifacts .
 
       - name: LS artifacts
         run: ls artifacts
