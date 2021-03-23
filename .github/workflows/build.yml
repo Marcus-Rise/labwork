@@ -34,9 +34,31 @@ jobs:
 
       - name: LS artifacts
         run: ls artifacts
-#
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: artifacts
-#          path: artifacts
+
+      - name: Upload web app
+        uses: actions/upload-artifact@v2
+        with:
+          name: web
+          path: artifacts/dist
+
+      - name: Upload linux app
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux
+          path: |
+            artifacts/linux-setup
+            artifacts/net-labwork-linux-x64
+
+      - name: Upload windows app
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows
+          path: |
+            artifacts/win-setup
+            artifacts/net-labwork-win32-x64
+
+      - name: Upload mac os app
+        uses: actions/upload-artifact@v2
+        with:
+          name: mac_os
+          path: artifacts/net-labwork-darwin-x64
