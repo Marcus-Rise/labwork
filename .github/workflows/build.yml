@@ -36,10 +36,6 @@ jobs:
         run: |
           echo $USER_PASSWORD | docker login https://docker.pkg.github.com -u $USER_NAME --password-stdin
 
-      - name: Pull cache
-        run: |
-          docker pull ${{ env.IMAGE_NAME }}
-
       - name: Install
         run: docker build --target node_modules --cache-from ${{ env.IMAGE_NAME }} .
 
