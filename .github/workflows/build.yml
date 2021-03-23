@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: docker build --target node_modules .
+
+      - name: Build web app
+        run: docker build --target build .
+
+      - name: Build desktop app
+        run: docker build --target package .
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: artifacts
+        run: docker build --target artifacts -o artifacts .
