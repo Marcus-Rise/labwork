@@ -19,7 +19,7 @@
     "create-installer-win": "electron-installer-windows --src desktop/net-labwork-win32-x64 --arch=x64 --dest desktop/win-setup"
   },
   "dependencies": {
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "core-js": "^2.6.5",
     "material-design-icons-iconfont": "^3.0.3",
     "pdfvuer": "^1.3.0",
