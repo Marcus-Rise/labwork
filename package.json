@@ -44,7 +44,7 @@
     "@vue/cli-service": "^3.6.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
-    "electron": "^8.2.5",
+    "electron": "^11.5.0",
     "electron-installer-debian": "^3.0.0",
     "electron-installer-windows": "^3.0.0",
     "electron-packager": "^14.2.1",
